@@ -35,8 +35,6 @@ public class MenuScreen implements Screen {
     public void show() {
         mainMenuImg=new Texture("Menu.png");
         circleImg = new Texture("Circle.png");
-
-
     }
 
     @Override
@@ -65,9 +63,6 @@ public class MenuScreen implements Screen {
             this.dispose();
             game.setScreen(new CreditsScreen(game));
         }
-
-        System.out.println(circleIndx);
-
         game.batch.end();
     }
 
