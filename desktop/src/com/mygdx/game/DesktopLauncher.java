@@ -11,6 +11,5 @@ public class DesktopLauncher {
 		config.setWindowedMode(MainGame.ScreenWidth,MainGame.ScreenHeight);
 		config.setTitle("LinksAdventure");
 		new Lwjgl3Application(new MainGame(), config);
-		//this is a comment
 	}
 }
