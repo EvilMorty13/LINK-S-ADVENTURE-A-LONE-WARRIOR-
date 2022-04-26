@@ -256,6 +256,11 @@ public class InsideStart implements Screen {
         else if(UpStand) game.batch.draw(new Texture("Stand_Up.png"),HeroX,HeroY);
         else if(DownStand) game.batch.draw(new Texture("Stand_Down.png"),HeroX,HeroY);
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.B)){
+            this.dispose();
+            game.setScreen(new MenuScreen(game));
+        }
+
         game.batch.end();
     }
 
