@@ -55,12 +55,13 @@ public class InsideStart implements Screen {
     obstacle3 obs3=new obstacle3();
     obstacle4 obs4=new obstacle4();
     obstacle5 obs5=new obstacle5();
+    obstacle6 obs6=new obstacle6();
+    obstacle7 obs7=new obstacle7();
 
     public InsideStart(MainGame game){
         this.game=game;
 
         //Character Movement Animation
-
 
         TextureRegion[][] tempRight = TextureRegion.split(new Texture("Movement_Right.png"),100,100);
         TextureRegion[][] tempLeft = TextureRegion.split(new Texture("Movement_Left.png"),100,100);
@@ -89,18 +90,15 @@ public class InsideStart implements Screen {
         int indx=0;
         for(int i=0;i<3;i++){
             for(int j=0;j<2;j++){
-
                 moveRight[indx]=tempRight[i][j];
                 moveLeft[indx]=tempLeft[i][j];
 
                 DownSword[indx]=tempDownSword[i][j];
-
                 if(indx<5){
                     RightSword[indx]=tempRightSword[i][j];
                     LeftSword[indx]=tempLeftSword[i][j];
                     UpSword[indx]=tempUpSword[i][j];
                 }
-
                 indx++;
             }
         }
@@ -156,6 +154,10 @@ public class InsideStart implements Screen {
                     obs4.limitX2-=4;
                     obs5.limitX1-=4;
                     obs5.limitX2-=4;
+                    obs6.limitX1-=4;
+                    obs6.limitX2-=4;
+                    obs7.limitX1-=4;
+                    obs7.limitX2-=4;
                     HeroLeftLimit-=4;
                 }
 
@@ -163,6 +165,8 @@ public class InsideStart implements Screen {
             else HeroX+=4;
             if(HeroX>HeroRightLimit) HeroX=HeroRightLimit;
             else if(HeroY>obs5.limitY1 && HeroY<obs5.limitY2 && HeroX<obs5.limitX2 && HeroX>=obs5.limitX1) HeroX=obs5.limitX1;
+            else if(HeroY<obs6.limitY && HeroX<obs6.limitX2 && HeroX>=obs6.limitX1) HeroX=obs6.limitX1;
+            else if(HeroY>obs7.limitY1 && HeroY<obs7.limitY2 && HeroX<obs7.limitX2 && HeroX>=obs7.limitX1) HeroX=obs7.limitX1;
             System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
             System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
             game.batch.draw((TextureRegion) RightMovement.getKeyFrame(time,true),HeroX,HeroY);
@@ -186,6 +190,10 @@ public class InsideStart implements Screen {
                     obs4.limitX2+=4;
                     obs5.limitX1+=4;
                     obs5.limitX2+=4;
+                    obs6.limitX1+=4;
+                    obs6.limitX2+=4;
+                    obs7.limitX1+=4;
+                    obs7.limitX2+=4;
                     HeroLeftLimit+=4;
                 }
 
@@ -195,6 +203,8 @@ public class InsideStart implements Screen {
             else if(HeroY>obs3.limitY && HeroX<=obs3.limitX) HeroX=obs3.limitX;
             else if(HeroY>obs4.limitY1 && HeroY<obs4.limitY2 && HeroX<=obs4.limitX2) HeroX=obs4.limitX2;
             else if(HeroY>obs5.limitY1 && HeroY<obs5.limitY2 && HeroX>obs5.limitX1 && HeroX<=obs5.limitX2) HeroX=obs5.limitX2;
+            else if(HeroY<obs6.limitY && HeroX>obs6.limitX1 && HeroX<=obs6.limitX2) HeroX=obs6.limitX2;
+            else if(HeroY>obs7.limitY1 && HeroY<obs7.limitY2 && HeroX>obs7.limitX1 && HeroX<=obs7.limitX2) HeroX=obs7.limitX2;
             System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
             System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
             game.batch.draw((TextureRegion) LeftMovement.getKeyFrame(time,true),HeroX,HeroY);
@@ -211,6 +221,7 @@ public class InsideStart implements Screen {
             else if(HeroX<obs3.limitX && HeroY>=obs3.limitY) HeroY=obs3.limitY;
             else if(HeroX>=obs4.limitX1 && HeroX<obs4.limitX2 && HeroY<obs4.limitY2 && HeroY>=obs4.limitY1) HeroY= obs4.limitY1;
             else if(HeroX>obs5.limitX1 && HeroX<obs5.limitX2 && HeroY<obs5.limitY2 && HeroY>=obs5.limitY1) HeroY=obs5.limitY1;
+            else if(HeroX>obs7.limitX1 && HeroX<obs7.limitX2 && HeroY<obs7.limitY2 && HeroY>=obs7.limitY1) HeroY= obs7.limitY1;
             System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
             System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
             game.batch.draw((TextureRegion) UpMovement.getKeyFrame(time,true),HeroX,HeroY);
@@ -226,22 +237,18 @@ public class InsideStart implements Screen {
             if(HeroY<=obs1.limitY) HeroY=obs1.limitY;
             else if(HeroX>=obs4.limitX1 && HeroX<obs4.limitX2 && HeroY>obs4.limitY1 && HeroY<=obs4.limitY2) HeroY=obs4.limitY2;
             else if(HeroX>obs5.limitX1 && HeroX<obs5.limitX2 && HeroY>obs5.limitY1 && HeroY<=obs5.limitY2) HeroY=obs5.limitY2;
+            else if(HeroX>obs6.limitX1 && HeroX<obs6.limitX2 && HeroY<=obs6.limitY) HeroY=obs6.limitY;
+            else if(HeroX>obs7.limitX1 && HeroX<obs7.limitX2 && HeroY>obs7.limitY1 && HeroY<=obs7.limitY2) HeroY= obs7.limitY2;
             System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
             System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
             game.batch.draw((TextureRegion) DownMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
-        else if(Gdx.input.isKeyPressed(Input.Keys.A)&& RightStand==true){
-            game.batch.draw((TextureRegion)RightSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
-        }
-        else if(Gdx.input.isKeyPressed(Input.Keys.A)&& LeftStand==true){
-            game.batch.draw((TextureRegion)LeftSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
-        }
-        else if(Gdx.input.isKeyPressed(Input.Keys.A)&& UpStand==true){
-            game.batch.draw((TextureRegion)UpSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
-        }
-        else if(Gdx.input.isKeyPressed(Input.Keys.A)&& DownStand==true){
-            game.batch.draw((TextureRegion)DownSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
+        else if(Gdx.input.isKeyPressed(Input.Keys.A)){ // sword animation
+            if(RightStand) game.batch.draw((TextureRegion)RightSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
+            else if(LeftStand) game.batch.draw((TextureRegion)LeftSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
+            else if(UpStand) game.batch.draw((TextureRegion)UpSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
+            else if(DownStand) game.batch.draw((TextureRegion)DownSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
         else if(RightStand) game.batch.draw(new Texture("Stand_Right.png"),HeroX,HeroY);
