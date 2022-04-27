@@ -1,9 +1,11 @@
-package com.mygdx.game;
+package Credit;
 
+import Menu.MenuScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.MainGame;
 
 public class CreditsScreen implements Screen {
     MainGame game;

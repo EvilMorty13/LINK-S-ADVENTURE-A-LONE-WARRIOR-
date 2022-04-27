@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package Menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,8 +6,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
-
-import java.security.Key;
+import Credit.CreditsScreen;
+import Play.InsideStart;
+import com.mygdx.game.MainGame;
 
 public class MenuScreen implements Screen {
 

@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package ObstacleDetection;
 
 public class obstacle3 {
     public float limitX=30;

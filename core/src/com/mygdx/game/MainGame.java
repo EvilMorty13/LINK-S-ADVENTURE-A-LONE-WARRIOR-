@@ -1,13 +1,12 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import Menu.MenuScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MainGame extends Game {
-	SpriteBatch batch;
+	public SpriteBatch batch;
 	Texture img;
 	public static final int ScreenWidth = 1280;
 	public static final int ScreenHeight = 720;
