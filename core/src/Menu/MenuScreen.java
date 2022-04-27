@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import Credit.CreditsScreen;
 import Play.InsideStart;
+import Instructions.InstructionScreen;
 import com.mygdx.game.MainGame;
 
 public class MenuScreen implements Screen {
@@ -73,14 +74,18 @@ public class MenuScreen implements Screen {
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.E) && circleIndx==0){
-
             this.dispose();
             MenuSelection.play();
             game.setScreen(new InsideStart(game));
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E) && circleIndx==3){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E) && circleIndx==2){
+            this.dispose();
+            MenuSelection.play();
+            game.setScreen(new InstructionScreen(game));
+        }
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E) && circleIndx==3){
             this.dispose();
             MenuSelection.play();
             game.setScreen(new CreditsScreen(game));
@@ -113,6 +118,5 @@ public class MenuScreen implements Screen {
         Background.dispose();
         MenuMoving.dispose();
         MenuSelection.dispose();
-
     }
 }
