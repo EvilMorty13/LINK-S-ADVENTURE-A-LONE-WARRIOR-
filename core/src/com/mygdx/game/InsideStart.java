@@ -57,6 +57,9 @@ public class InsideStart implements Screen {
     obstacle5 obs5=new obstacle5();
     obstacle6 obs6=new obstacle6();
     obstacle7 obs7=new obstacle7();
+    obstacle8 obs8=new obstacle8();
+    obstacle9 obs9=new obstacle9();
+    obstacle10 obs10=new obstacle10();
 
     public InsideStart(MainGame game){
         this.game=game;
@@ -158,6 +161,12 @@ public class InsideStart implements Screen {
                     obs6.limitX2-=4;
                     obs7.limitX1-=4;
                     obs7.limitX2-=4;
+                    obs8.limitX1-=4;
+                    obs8.limitX2-=4;
+                    obs9.limitX1-=4;
+                    obs9.limitX2-=4;
+                    obs10.limitX1-=4;
+                    obs10.limitX2-=4;
                     HeroLeftLimit-=4;
                 }
 
@@ -167,6 +176,9 @@ public class InsideStart implements Screen {
             else if(HeroY>obs5.limitY1 && HeroY<obs5.limitY2 && HeroX<obs5.limitX2 && HeroX>=obs5.limitX1) HeroX=obs5.limitX1;
             else if(HeroY<obs6.limitY && HeroX<obs6.limitX2 && HeroX>=obs6.limitX1) HeroX=obs6.limitX1;
             else if(HeroY>obs7.limitY1 && HeroY<obs7.limitY2 && HeroX<obs7.limitX2 && HeroX>=obs7.limitX1) HeroX=obs7.limitX1;
+            else if(HeroY>obs8.limitY1 && HeroY<obs8.limitY2 && HeroX<obs8.limitX2 && HeroX>=obs8.limitX1) HeroX=obs8.limitX1;
+            else if(HeroY>obs9.limitY1 && HeroY<obs9.limitY2 && HeroX<obs9.limitX2 && HeroX>=obs9.limitX1) HeroX=obs9.limitX1;
+            else if(HeroY>=obs10.limitY1 && HeroY<=obs10.limitY2 && HeroX<obs10.limitX2 && HeroX>=obs10.limitX1) HeroX=obs10.limitX1;
             System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
             System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
             game.batch.draw((TextureRegion) RightMovement.getKeyFrame(time,true),HeroX,HeroY);
@@ -194,6 +206,12 @@ public class InsideStart implements Screen {
                     obs6.limitX2+=4;
                     obs7.limitX1+=4;
                     obs7.limitX2+=4;
+                    obs8.limitX1+=4;
+                    obs8.limitX2+=4;
+                    obs9.limitX1+=4;
+                    obs9.limitX2+=4;
+                    obs10.limitX1+=4;
+                    obs10.limitX2+=4;
                     HeroLeftLimit+=4;
                 }
 
@@ -205,6 +223,8 @@ public class InsideStart implements Screen {
             else if(HeroY>obs5.limitY1 && HeroY<obs5.limitY2 && HeroX>obs5.limitX1 && HeroX<=obs5.limitX2) HeroX=obs5.limitX2;
             else if(HeroY<obs6.limitY && HeroX>obs6.limitX1 && HeroX<=obs6.limitX2) HeroX=obs6.limitX2;
             else if(HeroY>obs7.limitY1 && HeroY<obs7.limitY2 && HeroX>obs7.limitX1 && HeroX<=obs7.limitX2) HeroX=obs7.limitX2;
+            else if(HeroY>obs8.limitY1 && HeroY<obs8.limitY2 && HeroX>obs8.limitX1 && HeroX<=obs8.limitX2) HeroX=obs8.limitX2;
+            else if(HeroY>obs9.limitY1 && HeroY<obs9.limitY2 && HeroX>obs9.limitX1 && HeroX<=obs9.limitX2) HeroX=obs9.limitX2;
             System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
             System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
             game.batch.draw((TextureRegion) LeftMovement.getKeyFrame(time,true),HeroX,HeroY);
@@ -222,6 +242,8 @@ public class InsideStart implements Screen {
             else if(HeroX>=obs4.limitX1 && HeroX<obs4.limitX2 && HeroY<obs4.limitY2 && HeroY>=obs4.limitY1) HeroY= obs4.limitY1;
             else if(HeroX>obs5.limitX1 && HeroX<obs5.limitX2 && HeroY<obs5.limitY2 && HeroY>=obs5.limitY1) HeroY=obs5.limitY1;
             else if(HeroX>obs7.limitX1 && HeroX<obs7.limitX2 && HeroY<obs7.limitY2 && HeroY>=obs7.limitY1) HeroY= obs7.limitY1;
+            else if(HeroX>obs8.limitX1 && HeroX<obs8.limitX2 && HeroY<obs8.limitY2 && HeroY>=obs8.limitY1) HeroY=obs8.limitY1;
+            else if(HeroX>obs9.limitX1 && HeroX<obs9.limitX2 && HeroY<obs9.limitY2 && HeroY>=obs9.limitY1) HeroY=obs9.limitY1;
             System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
             System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
             game.batch.draw((TextureRegion) UpMovement.getKeyFrame(time,true),HeroX,HeroY);
@@ -239,6 +261,8 @@ public class InsideStart implements Screen {
             else if(HeroX>obs5.limitX1 && HeroX<obs5.limitX2 && HeroY>obs5.limitY1 && HeroY<=obs5.limitY2) HeroY=obs5.limitY2;
             else if(HeroX>obs6.limitX1 && HeroX<obs6.limitX2 && HeroY<=obs6.limitY) HeroY=obs6.limitY;
             else if(HeroX>obs7.limitX1 && HeroX<obs7.limitX2 && HeroY>obs7.limitY1 && HeroY<=obs7.limitY2) HeroY= obs7.limitY2;
+            else if(HeroX>obs8.limitX1 && HeroX<obs8.limitX2 && HeroY>obs8.limitY1 && HeroY<=obs8.limitY2) HeroY=obs8.limitY2;
+            else if(HeroX>obs9.limitX1 && HeroX<obs9.limitX2 && HeroY>obs9.limitY1 && HeroY<=obs9.limitY2) HeroY=obs9.limitY2;
             System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
             System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
             game.batch.draw((TextureRegion) DownMovement.getKeyFrame(time,true),HeroX,HeroY);
