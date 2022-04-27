@@ -27,12 +27,25 @@ public class MenuScreen implements Screen {
 
     int circleIndx=0;
 
+    Music Background;
+    Music MenuMoving;
+    Music MenuSelection;
+
+
     public MenuScreen(MainGame game){
         this.game=game;
-
     }
     @Override
     public void show() {
+
+        Background = Gdx.audio.newMusic(Gdx.files.internal("Background.mp3"));
+        MenuMoving = Gdx.audio.newMusic(Gdx.files.internal("Menu_Moving.mp3"));
+        MenuSelection = Gdx.audio.newMusic(Gdx.files.internal("Menu_Selection.mp3"));
+
+        Background.setLooping(true);
+        Background.setVolume(0.2f);
+        Background.play();
+
         mainMenuImg=new Texture("Menu.png");
         circleImg = new Texture("Circle.png");
     }
@@ -45,22 +58,30 @@ public class MenuScreen implements Screen {
         game.batch.draw(circleImg,circleX[circleIndx],circleY[circleIndx],circleWidth,circleHight);
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
+            MenuMoving.stop();
+            MenuMoving.play();
             circleIndx++;
             if(circleIndx>=4) circleIndx=0;
         }
 
         else if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+            MenuMoving.stop();
+            MenuMoving.play();
             circleIndx--;
             if(circleIndx<0) circleIndx=3;
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.E) && circleIndx==0){
+
             this.dispose();
+            MenuSelection.play();
             game.setScreen(new InsideStart(game));
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.E) && circleIndx==3){
+
             this.dispose();
+            MenuSelection.play();
             game.setScreen(new CreditsScreen(game));
         }
         game.batch.end();
@@ -88,6 +109,9 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
+        Background.dispose();
+        MenuMoving.dispose();
+        MenuSelection.dispose();
 
     }
 }
