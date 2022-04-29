@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MainGame;
+import obstacleCordinateChange.*;
+import obstacleDetectionConditon.*;
 
 public class InsideStart implements Screen {
     MainGame game;
@@ -44,8 +46,8 @@ public class InsideStart implements Screen {
 
     float time;
 
-    float HeroX=1008;
-    float HeroY=102;
+    public float HeroX=1008;
+    public float HeroY=102;
 
     float playX1=30;
     float playX2=1140;
@@ -68,22 +70,20 @@ public class InsideStart implements Screen {
     obstacle9 obs9=new obstacle9();
     obstacle10 obs10=new obstacle10();
     obstacle11 obs11=new obstacle11();
-
     obstacle12 obs12=new obstacle12();
     obstacle14 obs14=new obstacle14();
     obstacle15 obs15=new obstacle15();
     obstacle16 obs16=new obstacle16();
     obstacle17 obs17=new obstacle17();
-
     obstacle17_bridge obs17_bridge = new obstacle17_bridge();
-
     obstacle18 obs18=new obstacle18();
-
     obstacle19 obs19=new obstacle19();
-
     obstacle20 obs20=new obstacle20();
-
     obstacle21 obs21=new obstacle21();
+    obstacle22 obs22=new obstacle22();
+    obstacle23 obs23=new obstacle23();
+    obstacle24 obs24=new obstacle24();
+    obstacle25 obs25=new obstacle25();
     obstacle26 obs26=new obstacle26();
 
     public InsideStart(MainGame game){
@@ -184,71 +184,17 @@ public class InsideStart implements Screen {
                     HeroX+=4;
                 }
                 else{
-                    obs3.limitX-=4;
-                    obs4.limitX1-=4;
-                    obs4.limitX2-=4;
-                    obs5.limitX1-=4;
-                    obs5.limitX2-=4;
-                    obs6.limitX1-=4;
-                    obs6.limitX2-=4;
-                    obs7.limitX1-=4;
-                    obs7.limitX2-=4;
-                    obs8.limitX1-=4;
-                    obs8.limitX2-=4;
-                    obs9.limitX1-=4;
-                    obs9.limitX2-=4;
-                    obs10.limitX1-=4;
-                    obs10.limitX2-=4;
-                    obs11.limitX1-=4;
-                    obs11.limitX2-=4;
-                    obs12.limitX1-=4;
-                    obs12.limitX2-=4;
-                    obs14.limitX1-=4;
-                    obs14.limitX2-=4;
-                    obs15.limitX1-=4;
-                    obs15.limitX2-=4;
-                    obs16.limitX1-=4;
-                    obs16.limitX2-=4;
-                    obs17.limitX1-=4;
-                    obs17.limitX2-=4;
-                    obs17_bridge.limitX1-=4;
-                    obs17_bridge.limitX2-=4;
-                    obs18.limitX1-=4;
-                    obs18.limitX2-=4;
-                    obs19.limitX1-=4;
-                    obs19.limitX2-=4;
-                    obs20.limitX1-=4;
-                    obs20.limitX2-=4;
-                    obs21.limitX1-=4;
-                    obs21.limitX2-=4;
-                    obs26.limitX1-=4;
-                    obs26.limitX2-=4;
+                    new obstacleCordinateChangeXneg().change(obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs10,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
                     HeroLeftLimit-=4;
                 }
 
             }
             else HeroX+=4;
             if(HeroX>HeroRightLimit) HeroX=HeroRightLimit;
-            else if(HeroY>obs5.limitY1 && HeroY<obs5.limitY2 && HeroX<obs5.limitX2 && HeroX>=obs5.limitX1) HeroX=obs5.limitX1;
-            else if(HeroY<obs6.limitY && HeroX<obs6.limitX2 && HeroX>=obs6.limitX1) HeroX=obs6.limitX1;
-            else if(HeroY>obs7.limitY1 && HeroY<obs7.limitY2 && HeroX<obs7.limitX2 && HeroX>=obs7.limitX1) HeroX=obs7.limitX1;
-            else if(HeroY>obs8.limitY1 && HeroY<obs8.limitY2 && HeroX<obs8.limitX2 && HeroX>=obs8.limitX1) HeroX=obs8.limitX1;
-            else if(HeroY>obs9.limitY1 && HeroY<obs9.limitY2 && HeroX<obs9.limitX2 && HeroX>=obs9.limitX1) HeroX=obs9.limitX1;
-            else if(HeroY>=obs10.limitY1 && HeroY<=obs10.limitY2 && HeroX<obs10.limitX2 && HeroX>=obs10.limitX1) HeroX=obs10.limitX1;
-            else if(HeroY>obs11.limitY1 && HeroY<obs11.limitY2 && HeroX<obs11.limitX2 && HeroX>=obs11.limitX1) HeroX=obs11.limitX1;
-            else if(HeroY>obs12.limitY1 && HeroY<obs12.limitY2 && HeroX<obs12.limitX2 && HeroX>=obs12.limitX1) HeroX=obs12.limitX1;
-            else if(HeroY>obs14.limitY1 && HeroY<obs14.limitY2 && HeroX<obs14.limitX2 && HeroX>=obs14.limitX1) HeroX=obs14.limitX1;
-            else if(HeroY>obs15.limitY1 && HeroY<obs15.limitY2 && HeroX<obs15.limitX2 && HeroX>=obs15.limitX1) HeroX=obs15.limitX1;
-            else if(HeroY>obs16.limitY1 && HeroY<obs16.limitY2 && HeroX<obs16.limitX2 && HeroX>=obs16.limitX1) HeroX=obs16.limitX1;
-            else if(HeroY>obs17.limitY1 && HeroY<obs17.limitY2 && HeroX<obs17.limitX2 && HeroX>=obs17.limitX1) HeroX=obs17.limitX1;
-            else if(HeroY>obs17_bridge.limitY1 && HeroY<obs17_bridge.limitY2 && HeroX<obs17_bridge.limitX2 && HeroX>=obs17_bridge.limitX1) HeroX=obs17_bridge.limitX1;
-            else if(HeroY>obs18.limitY1 && HeroY<obs18.limitY2 && HeroX<obs18.limitX2 && HeroX>=obs18.limitX1) HeroX=obs18.limitX1;
-            else if(HeroY>obs19.limitY1 && HeroY<obs19.limitY2 && HeroX<obs19.limitX2 && HeroX>=obs19.limitX1) HeroX=obs19.limitX1;
-            else if(HeroY>obs20.limitY1 && HeroY<obs20.limitY2 && HeroX<obs20.limitX2 && HeroX>=obs20.limitX1) HeroX=obs20.limitX1;
-            else if(HeroY>obs21.limitY1 && HeroY<obs21.limitY2 && HeroX<obs21.limitX2 && HeroX>=obs21.limitX1) HeroX=obs21.limitX1;
-            else if(HeroY>obs26.limitY1 && HeroY<obs26.limitY2 && HeroX<obs26.limitX2 && HeroX>=obs26.limitX1) HeroX=obs26.limitX1;
-            System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
-            System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
+            else{
+                obstacleDetectionConditionRight rightCheck = new obstacleDetectionConditionRight();
+                HeroX = rightCheck.check(HeroX, HeroY, obs5, obs6, obs7, obs8, obs9, obs10, obs11, obs12, obs14, obs15, obs16, obs17, obs17_bridge, obs18, obs19, obs20, obs21, obs22, obs23, obs24, obs25, obs26);
+            }
             game.batch.draw((TextureRegion) RightMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
@@ -265,72 +211,16 @@ public class InsideStart implements Screen {
                     HeroX-=4;
                 }
                 else{
-                    obs3.limitX+=4;
-                    obs4.limitX1+=4;
-                    obs4.limitX2+=4;
-                    obs5.limitX1+=4;
-                    obs5.limitX2+=4;
-                    obs6.limitX1+=4;
-                    obs6.limitX2+=4;
-                    obs7.limitX1+=4;
-                    obs7.limitX2+=4;
-                    obs8.limitX1+=4;
-                    obs8.limitX2+=4;
-                    obs9.limitX1+=4;
-                    obs9.limitX2+=4;
-                    obs10.limitX1+=4;
-                    obs10.limitX2+=4;
-                    obs11.limitX1+=4;
-                    obs11.limitX2+=4;
-                    obs12.limitX1+=4;
-                    obs12.limitX2+=4;
-                    obs14.limitX1+=4;
-                    obs14.limitX2+=4;
-                    obs15.limitX1+=4;
-                    obs15.limitX2+=4;
-                    obs16.limitX1+=4;
-                    obs16.limitX2+=4;
-                    obs17.limitX1+=4;
-                    obs17.limitX2+=4;
-                    obs17_bridge.limitX1+=4;
-                    obs17_bridge.limitX2+=4;
-                    obs18.limitX1+=4;
-                    obs18.limitX2+=4;
-                    obs19.limitX1+=4;
-                    obs19.limitX2+=4;
-                    obs20.limitX1+=4;
-                    obs20.limitX2+=4;
-                    obs21.limitX1+=4;
-                    obs21.limitX2+=4;
-                    obs26.limitX1+=4;
-                    obs26.limitX2+=4;
+                    new obstacleCordinateChangeXpos().change(obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs10,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
                     HeroLeftLimit+=4;
                 }
-
             }
             else HeroX-=4;
             if(HeroX< HeroLeftLimit) HeroX=HeroLeftLimit;
-            else if(HeroY>obs3.limitY && HeroX<=obs3.limitX) HeroX=obs3.limitX;
-            else if(HeroY>obs4.limitY1 && HeroY<obs4.limitY2 && HeroX<=obs4.limitX2) HeroX=obs4.limitX2;
-            else if(HeroY>obs5.limitY1 && HeroY<obs5.limitY2 && HeroX>obs5.limitX1 && HeroX<=obs5.limitX2) HeroX=obs5.limitX2;
-            else if(HeroY<obs6.limitY && HeroX>obs6.limitX1 && HeroX<=obs6.limitX2) HeroX=obs6.limitX2;
-            else if(HeroY>obs7.limitY1 && HeroY<obs7.limitY2 && HeroX>obs7.limitX1 && HeroX<=obs7.limitX2) HeroX=obs7.limitX2;
-            else if(HeroY>obs8.limitY1 && HeroY<obs8.limitY2 && HeroX>obs8.limitX1 && HeroX<=obs8.limitX2) HeroX=obs8.limitX2;
-            else if(HeroY>obs9.limitY1 && HeroY<obs9.limitY2 && HeroX>obs9.limitX1 && HeroX<=obs9.limitX2) HeroX=obs9.limitX2;
-            else if(HeroY>obs11.limitY1 && HeroY<obs11.limitY2 && HeroX>obs11.limitX1 && HeroX<=obs11.limitX2) HeroX=obs11.limitX2;
-            else if(HeroY>obs12.limitY1 && HeroY<obs12.limitY2 && HeroX>obs12.limitX1 && HeroX<=obs12.limitX2) HeroX=obs12.limitX2;
-            else if(HeroY>obs14.limitY1 && HeroY<obs14.limitY2 && HeroX>obs14.limitX1 && HeroX<=obs14.limitX2) HeroX=obs14.limitX2;
-            else if(HeroY>obs15.limitY1 && HeroY<obs15.limitY2 && HeroX>obs15.limitX1 && HeroX<=obs15.limitX2) HeroX=obs15.limitX2;
-            else if(HeroY>obs16.limitY1 && HeroY<obs16.limitY2 && HeroX>obs16.limitX1 && HeroX<=obs16.limitX2) HeroX=obs16.limitX2;
-            else if(HeroY>obs17.limitY1 && HeroY<obs17.limitY2 && HeroX>obs17.limitX1 && HeroX<=obs17.limitX2) HeroX=obs17.limitX2;
-            else if(HeroY>obs17_bridge.limitY1 && HeroY<obs17_bridge.limitY2 && HeroX>obs17_bridge.limitX1 && HeroX<=obs17_bridge.limitX2) HeroX=obs17_bridge.limitX2;
-            else if(HeroY>obs18.limitY1 && HeroY<obs18.limitY2 && HeroX>obs18.limitX1 && HeroX<=obs18.limitX2) HeroX=obs18.limitX2;
-            else if(HeroY>obs19.limitY1 && HeroY<obs19.limitY2 && HeroX>obs19.limitX1 && HeroX<=obs19.limitX2) HeroX=obs19.limitX2;
-            else if(HeroY>obs20.limitY1 && HeroY<obs20.limitY2 && HeroX>obs20.limitX1 && HeroX<=obs20.limitX2) HeroX=obs20.limitX2;
-            else if(HeroY>obs21.limitY1 && HeroY<obs21.limitY2 && HeroX>obs21.limitX1 && HeroX<=obs21.limitX2) HeroX=obs21.limitX2;
-            else if(HeroY>obs26.limitY1 && HeroY<obs26.limitY2 && HeroX>obs26.limitX1 && HeroX<=obs26.limitX2) HeroX=obs26.limitX2;
-            System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
-            System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
+            else{
+                obstacleDetectionCondtionLeft leftCheck = new obstacleDetectionCondtionLeft();
+                HeroX = leftCheck.check(HeroX,HeroY,obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs26);
+            }
             game.batch.draw((TextureRegion) LeftMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
@@ -341,27 +231,8 @@ public class InsideStart implements Screen {
             UpStand=true;
             DownStand=false;
             HeroY+=4;
-            if(HeroY>=obs2.limitY) HeroY=obs2.limitY;
-            else if(HeroX<obs3.limitX && HeroY>=obs3.limitY) HeroY=obs3.limitY;
-            else if(HeroX>=obs4.limitX1 && HeroX<obs4.limitX2 && HeroY<obs4.limitY2 && HeroY>=obs4.limitY1) HeroY= obs4.limitY1;
-            else if(HeroX>obs5.limitX1 && HeroX<obs5.limitX2 && HeroY<obs5.limitY2 && HeroY>=obs5.limitY1) HeroY=obs5.limitY1;
-            else if(HeroX>obs7.limitX1 && HeroX<obs7.limitX2 && HeroY<obs7.limitY2 && HeroY>=obs7.limitY1) HeroY= obs7.limitY1;
-            else if(HeroX>obs8.limitX1 && HeroX<obs8.limitX2 && HeroY<obs8.limitY2 && HeroY>=obs8.limitY1) HeroY=obs8.limitY1;
-            else if(HeroX>obs9.limitX1 && HeroX<obs9.limitX2 && HeroY<obs9.limitY2 && HeroY>=obs9.limitY1) HeroY=obs9.limitY1;
-            else if(HeroX>obs11.limitX1 && HeroX<obs11.limitX2 && HeroY<obs11.limitY2 && HeroY>=obs11.limitY1) HeroY=obs11.limitY1;
-            else if(HeroX>obs12.limitX1 && HeroX<obs12.limitX2 && HeroY<obs12.limitY2 && HeroY>=obs12.limitY1) HeroY=obs12.limitY1;
-            else if(HeroX>obs14.limitX1 && HeroX<obs14.limitX2 && HeroY<obs14.limitY2 && HeroY>=obs14.limitY1) HeroY=obs14.limitY1;
-            else if(HeroX>obs15.limitX1 && HeroX<obs15.limitX2 && HeroY<obs15.limitY2 && HeroY>=obs15.limitY1) HeroY=obs15.limitY1;
-            else if(HeroX>obs16.limitX1 && HeroX<obs16.limitX2 && HeroY<obs16.limitY2 && HeroY>=obs16.limitY1) HeroY=obs16.limitY1;
-            else if(HeroX>obs17.limitX1 && HeroX<obs17.limitX2 && HeroY<obs17.limitY2 && HeroY>=obs17.limitY1) HeroY=obs17.limitY1;
-            else if(HeroX>obs17_bridge.limitX1 && HeroX<obs17_bridge.limitX2 && HeroY<obs17_bridge.limitY2 && HeroY>=obs17_bridge.limitY1) HeroY=obs17_bridge.limitY1;
-            else if(HeroX>obs18.limitX1 && HeroX<obs18.limitX2 && HeroY<obs18.limitY2 && HeroY>=obs18.limitY1) HeroY=obs18.limitY1;
-            else if(HeroX>obs19.limitX1 && HeroX<obs19.limitX2 && HeroY<obs19.limitY2 && HeroY>=obs19.limitY1) HeroY=obs19.limitY1;
-            else if(HeroX>obs20.limitX1 && HeroX<obs20.limitX2 && HeroY<obs20.limitY2 && HeroY>=obs20.limitY1) HeroY=obs20.limitY1;
-            else if(HeroX>obs21.limitX1 && HeroX<obs21.limitX2 && HeroY<obs21.limitY2 && HeroY>=obs21.limitY1) HeroY=obs21.limitY1;
-            else if(HeroX>obs26.limitX1 && HeroX<obs26.limitX2 && HeroY<obs26.limitY2 && HeroY>=obs26.limitY1) HeroY=obs26.limitY1;
-            System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
-            System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
+            obstacleDetectionConditionUp upCheck = new obstacleDetectionConditionUp();
+            HeroY=upCheck.check(HeroX,HeroY,obs2,obs3,obs4,obs5,obs7,obs8,obs9,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
             game.batch.draw((TextureRegion) UpMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
@@ -372,27 +243,8 @@ public class InsideStart implements Screen {
             UpStand=false;
             DownStand=true;
             HeroY-=4;
-            if(HeroY<=obs1.limitY) HeroY=obs1.limitY;
-            else if(HeroX>=obs4.limitX1 && HeroX<obs4.limitX2 && HeroY>obs4.limitY1 && HeroY<=obs4.limitY2) HeroY=obs4.limitY2;
-            else if(HeroX>obs5.limitX1 && HeroX<obs5.limitX2 && HeroY>obs5.limitY1 && HeroY<=obs5.limitY2) HeroY=obs5.limitY2;
-            else if(HeroX>obs6.limitX1 && HeroX<obs6.limitX2 && HeroY<=obs6.limitY) HeroY=obs6.limitY;
-            else if(HeroX>obs7.limitX1 && HeroX<obs7.limitX2 && HeroY>obs7.limitY1 && HeroY<=obs7.limitY2) HeroY= obs7.limitY2;
-            else if(HeroX>obs8.limitX1 && HeroX<obs8.limitX2 && HeroY>obs8.limitY1 && HeroY<=obs8.limitY2) HeroY=obs8.limitY2;
-            else if(HeroX>obs9.limitX1 && HeroX<obs9.limitX2 && HeroY>obs9.limitY1 && HeroY<=obs9.limitY2) HeroY=obs9.limitY2;
-            else if(HeroX>obs11.limitX1 && HeroX<obs11.limitX2 && HeroY>obs11.limitY1 && HeroY<=obs11.limitY2) HeroY=obs11.limitY2;
-            else if(HeroX>obs12.limitX1 && HeroX<obs12.limitX2 && HeroY>obs12.limitY1 && HeroY<=obs12.limitY2) HeroY=obs12.limitY2;
-            else if(HeroX>obs14.limitX1 && HeroX<obs14.limitX2 && HeroY>obs14.limitY1 && HeroY<=obs14.limitY2) HeroY=obs14.limitY2;
-            else if(HeroX>obs15.limitX1 && HeroX<obs15.limitX2 && HeroY>obs15.limitY1 && HeroY<=obs15.limitY2) HeroY=obs15.limitY2;
-            else if(HeroX>obs16.limitX1 && HeroX<obs16.limitX2 && HeroY>obs16.limitY1 && HeroY<=obs16.limitY2) HeroY=obs16.limitY2;
-            else if(HeroX>obs17.limitX1 && HeroX<obs17.limitX2 && HeroY>obs17.limitY1 && HeroY<=obs17.limitY2) HeroY=obs17.limitY2;
-            else if(HeroX>obs17_bridge.limitX1 && HeroX<obs17_bridge.limitX2 && HeroY>obs17_bridge.limitY1 && HeroY<=obs17_bridge.limitY2) HeroY=obs17_bridge.limitY2;
-            else if(HeroX>obs18.limitX1 && HeroX<obs18.limitX2 && HeroY>obs18.limitY1 && HeroY<=obs18.limitY2) HeroY=obs18.limitY2;
-            else if(HeroX>obs19.limitX1 && HeroX<obs19.limitX2 && HeroY>obs19.limitY1 && HeroY<=obs19.limitY2) HeroY=obs19.limitY2;
-            else if(HeroX>obs20.limitX1 && HeroX<obs20.limitX2 && HeroY>obs20.limitY1 && HeroY<=obs20.limitY2) HeroY=obs20.limitY2;
-            else if(HeroX>obs21.limitX1 && HeroX<obs21.limitX2 && HeroY>obs21.limitY1 && HeroY<=obs21.limitY2) HeroY=obs21.limitY2;
-            else if(HeroX>obs26.limitX1 && HeroX<obs26.limitX2 && HeroY>obs26.limitY1 && HeroY<=obs26.limitY2) HeroY=obs26.limitY2;
-            System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
-            System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
+            obstacleDetectionCondtionDown downCheck = new obstacleDetectionCondtionDown();
+            HeroY = downCheck.check(HeroX,HeroY,obs1,obs4,obs5,obs6,obs7,obs8,obs9,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
             game.batch.draw((TextureRegion) DownMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
