@@ -67,6 +67,7 @@ public class InsideStart implements Screen {
     obstacle8 obs8=new obstacle8();
     obstacle9 obs9=new obstacle9();
     obstacle10 obs10=new obstacle10();
+    obstacle18 obs18=new obstacle18();
     obstacle26 obs26=new obstacle26();
 
     public InsideStart(MainGame game){
@@ -182,6 +183,8 @@ public class InsideStart implements Screen {
                     obs9.limitX2-=4;
                     obs10.limitX1-=4;
                     obs10.limitX2-=4;
+                    obs18.limitX1-=4;
+                    obs18.limitX2-=4;
                     obs26.limitX1-=4;
                     obs26.limitX2-=4;
                     HeroLeftLimit-=4;
@@ -196,6 +199,7 @@ public class InsideStart implements Screen {
             else if(HeroY>obs8.limitY1 && HeroY<obs8.limitY2 && HeroX<obs8.limitX2 && HeroX>=obs8.limitX1) HeroX=obs8.limitX1;
             else if(HeroY>obs9.limitY1 && HeroY<obs9.limitY2 && HeroX<obs9.limitX2 && HeroX>=obs9.limitX1) HeroX=obs9.limitX1;
             else if(HeroY>=obs10.limitY1 && HeroY<=obs10.limitY2 && HeroX<obs10.limitX2 && HeroX>=obs10.limitX1) HeroX=obs10.limitX1;
+            else if(HeroY>obs18.limitY1 && HeroY<obs18.limitY2 && HeroX<obs18.limitX2 && HeroX>=obs18.limitX1) HeroX=obs18.limitX1;
             else if(HeroY>obs26.limitY1 && HeroY<obs26.limitY2 && HeroX<obs26.limitX2 && HeroX>=obs26.limitX1) HeroX=obs26.limitX1;
             System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
             System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
@@ -230,6 +234,8 @@ public class InsideStart implements Screen {
                     obs9.limitX2+=4;
                     obs10.limitX1+=4;
                     obs10.limitX2+=4;
+                    obs18.limitX1+=4;
+                    obs18.limitX2+=4;
                     obs26.limitX1+=4;
                     obs26.limitX2+=4;
                     HeroLeftLimit+=4;
@@ -245,6 +251,7 @@ public class InsideStart implements Screen {
             else if(HeroY>obs7.limitY1 && HeroY<obs7.limitY2 && HeroX>obs7.limitX1 && HeroX<=obs7.limitX2) HeroX=obs7.limitX2;
             else if(HeroY>obs8.limitY1 && HeroY<obs8.limitY2 && HeroX>obs8.limitX1 && HeroX<=obs8.limitX2) HeroX=obs8.limitX2;
             else if(HeroY>obs9.limitY1 && HeroY<obs9.limitY2 && HeroX>obs9.limitX1 && HeroX<=obs9.limitX2) HeroX=obs9.limitX2;
+            else if(HeroY>obs18.limitY1 && HeroY<obs18.limitY2 && HeroX>obs18.limitX1 && HeroX<=obs18.limitX2) HeroX=obs18.limitX2;
             else if(HeroY>obs26.limitY1 && HeroY<obs26.limitY2 && HeroX>obs26.limitX1 && HeroX<=obs26.limitX2) HeroX=obs26.limitX2;
             System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
             System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
@@ -265,6 +272,7 @@ public class InsideStart implements Screen {
             else if(HeroX>obs7.limitX1 && HeroX<obs7.limitX2 && HeroY<obs7.limitY2 && HeroY>=obs7.limitY1) HeroY= obs7.limitY1;
             else if(HeroX>obs8.limitX1 && HeroX<obs8.limitX2 && HeroY<obs8.limitY2 && HeroY>=obs8.limitY1) HeroY=obs8.limitY1;
             else if(HeroX>obs9.limitX1 && HeroX<obs9.limitX2 && HeroY<obs9.limitY2 && HeroY>=obs9.limitY1) HeroY=obs9.limitY1;
+            else if(HeroX>obs18.limitX1 && HeroX<obs18.limitX2 && HeroY<obs18.limitY2 && HeroY>=obs18.limitY1) HeroY=obs18.limitY1;
             else if(HeroX>obs26.limitX1 && HeroX<obs26.limitX2 && HeroY<obs26.limitY2 && HeroY>=obs26.limitY1) HeroY=obs26.limitY1;
             System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
             System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
@@ -285,6 +293,7 @@ public class InsideStart implements Screen {
             else if(HeroX>obs7.limitX1 && HeroX<obs7.limitX2 && HeroY>obs7.limitY1 && HeroY<=obs7.limitY2) HeroY= obs7.limitY2;
             else if(HeroX>obs8.limitX1 && HeroX<obs8.limitX2 && HeroY>obs8.limitY1 && HeroY<=obs8.limitY2) HeroY=obs8.limitY2;
             else if(HeroX>obs9.limitX1 && HeroX<obs9.limitX2 && HeroY>obs9.limitY1 && HeroY<=obs9.limitY2) HeroY=obs9.limitY2;
+            else if(HeroX>obs18.limitX1 && HeroX<obs18.limitX2 && HeroY>obs18.limitY1 && HeroY<=obs18.limitY2) HeroY=obs18.limitY2;
             else if(HeroX>obs26.limitX1 && HeroX<obs26.limitX2 && HeroY>obs26.limitY1 && HeroY<=obs26.limitY2) HeroY=obs26.limitY2;
             System.out.println("HeroX :: "+HeroX+" HeroY :: "+HeroY);
             System.out.println("gameMapX :: "+gameMapX+" gameMapY :: "+gameMapY);
