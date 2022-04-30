@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MainGame;
 import obstacleCordinateChange.*;
 import obstacleDetectionConditon.*;
+import Sound.*;
 
 public class InsideStart implements Screen {
     MainGame game;
@@ -41,8 +42,6 @@ public class InsideStart implements Screen {
     boolean UpStand=false;
     boolean DownStand=false;
 
-    Music MenuBack;
-    Music MainTheme;
 
     float time;
 
@@ -151,11 +150,10 @@ public class InsideStart implements Screen {
         UpSwordMovement = new Animation(0.08f,UpSword);
         DownSwordMovement = new Animation(0.08f,DownSword);
 
-        MenuBack = Gdx.audio.newMusic(Gdx.files.internal("Menu_Back.mp3"));
-        MainTheme = Gdx.audio.newMusic(Gdx.files.internal("Main_Theme.mp3"));
-        MainTheme.setLooping(true);
-        MainTheme.setVolume(0.1f);
-        MainTheme.play();
+        SoundManager.create();
+        SoundManager.MainTheme.setLooping(true);
+        SoundManager.MainTheme.setVolume(0.1f);
+        SoundManager.MainTheme.play();
 
     }
 
@@ -262,7 +260,8 @@ public class InsideStart implements Screen {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.B)){
             this.dispose();
-            MenuBack.play();
+            SoundManager.MenuBack.play();
+            SoundManager.MainTheme.dispose();
             game.setScreen(new MenuScreen(game));
         }
 
@@ -291,7 +290,6 @@ public class InsideStart implements Screen {
 
     @Override
     public void dispose() {
-        MainTheme.dispose();
-        MenuBack.dispose();
+        SoundManager.dispose();
     }
 }

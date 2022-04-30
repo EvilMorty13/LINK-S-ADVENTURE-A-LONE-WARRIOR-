@@ -7,20 +7,20 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MainGame;
+import Sound.*;
 
 public class CreditsScreen implements Screen {
     MainGame game;
     Texture Credits;
-    Music MenuBack;
+
     public CreditsScreen(MainGame game){
         this.game=game;
     }
 
     @Override
     public void show() {
-
+        SoundManager.create();
         Credits = new Texture("Credits.png");
-        MenuBack = Gdx.audio.newMusic(Gdx.files.internal("Menu_Back.mp3"));
     }
 
     @Override
@@ -30,7 +30,7 @@ public class CreditsScreen implements Screen {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.B)){
             this.dispose();
-            MenuBack.play();
+            SoundManager.MenuBack.play();
             game.setScreen(new MenuScreen(game));
         }
 
@@ -59,6 +59,6 @@ public class CreditsScreen implements Screen {
 
     @Override
     public void dispose() {
-        MenuBack.dispose();
+        SoundManager.dispose();
     }
 }
