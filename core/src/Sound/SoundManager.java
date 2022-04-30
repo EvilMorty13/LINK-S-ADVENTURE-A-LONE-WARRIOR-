@@ -23,5 +23,6 @@ public class SoundManager {
         MenuMoving.dispose();
         MenuSelection.dispose();
         MenuBack.dispose();
+        MainTheme.dispose();
     }
 }

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MainGame;
+import jdk.tools.jmod.Main;
 import obstacleCordinateChange.*;
 import obstacleDetectionConditon.*;
 import Sound.*;
@@ -84,10 +85,10 @@ public class InsideStart implements Screen {
     obstacle24 obs24=new obstacle24();
     obstacle25 obs25=new obstacle25();
     obstacle26 obs26=new obstacle26();
-
-    public InsideStart(MainGame game){
+    public boolean soundState;
+    public InsideStart(MainGame game,boolean soundState){
         this.game=game;
-
+        this.soundState=soundState;
         //Character Movement Animation
 
         TextureRegion[][] tempRight = TextureRegion.split(new Texture("Movement_Right.png"),100,100);
@@ -153,7 +154,7 @@ public class InsideStart implements Screen {
         SoundManager.create();
         SoundManager.MainTheme.setLooping(true);
         SoundManager.MainTheme.setVolume(0.1f);
-        SoundManager.MainTheme.play();
+        if(soundState) SoundManager.MainTheme.play();
 
     }
 
@@ -164,6 +165,7 @@ public class InsideStart implements Screen {
 
     @Override
     public void render(float delta) {
+
         time+=delta;
         ScreenUtils.clear(0,1,1,1);
         game.batch.begin();
@@ -261,8 +263,7 @@ public class InsideStart implements Screen {
         if(Gdx.input.isKeyJustPressed(Input.Keys.B)){
             this.dispose();
             SoundManager.MenuBack.play();
-            SoundManager.MainTheme.dispose();
-            game.setScreen(new MenuScreen(game));
+            game.setScreen(new MenuScreen(game,soundState));
         }
 
         game.batch.end();

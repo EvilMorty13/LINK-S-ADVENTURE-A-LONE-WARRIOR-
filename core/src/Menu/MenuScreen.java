@@ -30,20 +30,22 @@ public class MenuScreen implements Screen {
 
     int circleIndx=0;
 
-
-
+    public boolean soundState=true;
 
     public MenuScreen(MainGame game){
         this.game=game;
+    }
+    public MenuScreen(MainGame game,boolean soundState){
+        this.game=game;
+        this.soundState=soundState;
     }
     @Override
     public void show() {
 
         SoundManager.create();
-
         SoundManager.Background.setLooping(true);
         SoundManager.Background.setVolume(0.2f);
-        SoundManager.Background.play();
+        if(soundState) SoundManager.Background.play();
 
         mainMenuImg=new Texture("Menu2.png");
         circleImg = new Texture("Circle.png");
@@ -72,35 +74,16 @@ public class MenuScreen implements Screen {
             if(circleIndx<0) circleIndx=4;
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E) && circleIndx==0){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
             this.dispose();
             SoundManager.MenuSelection.play();
-            game.setScreen(new InsideStart(game));
+            if(circleIndx==0) game.setScreen(new InsideStart(game,soundState));
+            else if(circleIndx==1) game.setScreen(new SoundScreen(game));
+            else if(circleIndx==2) game.setScreen(new InstructionScreen(game,soundState));
+            else if(circleIndx==3) game.setScreen(new CreditsScreen(game,soundState));
+            else if(circleIndx==4) Gdx.app.exit();
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E) && circleIndx==1){
-            this.dispose();
-            SoundManager.MenuSelection.play();
-            game.setScreen(new SoundScreen(game));
-        }
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E) && circleIndx==2){
-            this.dispose();
-            SoundManager.MenuSelection.play();
-            game.setScreen(new InstructionScreen(game));
-        }
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E) && circleIndx==3){
-            this.dispose();
-            SoundManager.MenuSelection.play();
-            game.setScreen(new CreditsScreen(game));
-        }
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E) && circleIndx==4){
-            this.dispose();
-            SoundManager.MenuSelection.play();
-            Gdx.app.exit();
-        }
         game.batch.end();
     }
 

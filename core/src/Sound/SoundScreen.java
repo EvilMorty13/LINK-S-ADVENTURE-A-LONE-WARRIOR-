@@ -18,7 +18,7 @@ public class SoundScreen implements Screen {
     final int[] SoundCircleX = new int[]{1112,1192};
     final int[] SoundCircleY = new int[]{272,272};
 
-    int SoundCircleIndx=0;
+    public int SoundCircleIndx=0;
 
     public boolean SoundState = true;
 
@@ -55,19 +55,18 @@ public class SoundScreen implements Screen {
             if(SoundCircleIndx<0) SoundCircleIndx=1;
         }
 
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.E) && SoundCircleIndx==0){
             SoundState = true;
             SoundManager.MenuSelection.play();
+            this.dispose();
+            game.setScreen(new MenuScreen(game,SoundState));
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.E) && SoundCircleIndx==1){
             SoundState = false;
             SoundManager.MenuSelection.play();
-        }
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.B)){
             this.dispose();
-            SoundManager.MenuBack.play();
-            game.setScreen(new MenuScreen(game));
+            game.setScreen(new MenuScreen(game,SoundState));
         }
 
         game.batch.end();

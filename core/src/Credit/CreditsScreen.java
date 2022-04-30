@@ -12,9 +12,10 @@ import Sound.*;
 public class CreditsScreen implements Screen {
     MainGame game;
     Texture Credits;
-
-    public CreditsScreen(MainGame game){
+    public boolean soundState;
+    public CreditsScreen(MainGame game,boolean soundState){
         this.game=game;
+        this.soundState=soundState;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class CreditsScreen implements Screen {
         if(Gdx.input.isKeyJustPressed(Input.Keys.B)){
             this.dispose();
             SoundManager.MenuBack.play();
-            game.setScreen(new MenuScreen(game));
+            game.setScreen(new MenuScreen(game,soundState));
         }
 
         game.batch.end();
