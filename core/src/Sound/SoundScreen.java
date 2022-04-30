@@ -25,9 +25,7 @@ public class SoundScreen implements Screen {
     public SoundScreen(MainGame game){
         this.game=game;
     }
-    public SoundScreen(){
 
-    }
     @Override
     public void show() {
         SoundManager.create();
@@ -58,14 +56,14 @@ public class SoundScreen implements Screen {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.E) && SoundCircleIndx==0){
             SoundState = true;
-            SoundManager.MenuSelection.play();
             this.dispose();
+            SoundManager.MenuSelection.play();
             game.setScreen(new MenuScreen(game,SoundState));
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.E) && SoundCircleIndx==1){
             SoundState = false;
-            SoundManager.MenuSelection.play();
             this.dispose();
+            SoundManager.MenuSelection.play();
             game.setScreen(new MenuScreen(game,SoundState));
         }
 
