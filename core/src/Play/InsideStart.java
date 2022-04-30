@@ -14,6 +14,7 @@ import com.mygdx.game.MainGame;
 import jdk.tools.jmod.Main;
 import obstacleCordinateChange.*;
 import obstacleDetectionConditon.*;
+import HerosAnimation.*;
 import Sound.*;
 
 public class InsideStart implements Screen {
@@ -25,19 +26,6 @@ public class InsideStart implements Screen {
     float gameMapWidth=2000;
     float gameMapHight=720;
 
-    Animation RightMovement;
-    Animation LeftMovement;
-    Animation UpMovement;
-    Animation DownMovement;
-
-
-    Animation RightSwordMovement;
-    Animation LeftSwordMovement;
-
-    Animation UpSwordMovement;
-    Animation DownSwordMovement;
-
-
     boolean RightStand=true;
     boolean LeftStand=false;
     boolean UpStand=false;
@@ -46,8 +34,8 @@ public class InsideStart implements Screen {
 
     float time;
 
-    public float HeroX=1008;
-    public float HeroY=102;
+    public float HeroX=70;
+    public float HeroY=70;
 
     float playX1=30;
     float playX2=1140;
@@ -85,71 +73,12 @@ public class InsideStart implements Screen {
     obstacle24 obs24=new obstacle24();
     obstacle25 obs25=new obstacle25();
     obstacle26 obs26=new obstacle26();
+
+    LinksAnimation link = new LinksAnimation();
     public boolean soundState;
     public InsideStart(MainGame game,boolean soundState){
         this.game=game;
         this.soundState=soundState;
-        //Character Movement Animation
-
-        TextureRegion[][] tempRight = TextureRegion.split(new Texture("Movement_Right.png"),100,100);
-        TextureRegion[][] tempLeft = TextureRegion.split(new Texture("Movement_Left.png"),100,100);
-        TextureRegion[][] tempDown = TextureRegion.split(new Texture("Movement_Down.png"),100,100);
-        TextureRegion[][] tempUp = TextureRegion.split(new Texture("Movement_Up.png"),100,100);
-
-        //Character Sword Animation
-
-        TextureRegion[][] tempRightSword = TextureRegion.split(new Texture("Right_Sword.png"),100,100);
-        TextureRegion[][] tempLeftSword = TextureRegion.split(new Texture("Left_Sword.png"),100,100);
-        TextureRegion[][] tempUpSword = TextureRegion.split(new Texture("Up_Sword.png"),100,100);
-        TextureRegion[][] tempDownSword = TextureRegion.split(new Texture("Down_Sword.png"),100,100);
-
-
-
-        TextureRegion[] moveRight = new TextureRegion[6];
-        TextureRegion[] moveLeft = new TextureRegion[6];
-        TextureRegion[] moveUp = new TextureRegion[8];
-        TextureRegion[] moveDown = new TextureRegion[8];
-
-        TextureRegion[] RightSword = new TextureRegion[5];
-        TextureRegion[] LeftSword = new TextureRegion[5];
-        TextureRegion[] UpSword = new TextureRegion[5];
-        TextureRegion[] DownSword = new TextureRegion[6];
-
-        int indx=0;
-        for(int i=0;i<3;i++){
-            for(int j=0;j<2;j++){
-                moveRight[indx]=tempRight[i][j];
-                moveLeft[indx]=tempLeft[i][j];
-
-                DownSword[indx]=tempDownSword[i][j];
-                if(indx<5){
-                    RightSword[indx]=tempRightSword[i][j];
-                    LeftSword[indx]=tempLeftSword[i][j];
-                    UpSword[indx]=tempUpSword[i][j];
-                }
-                indx++;
-            }
-        }
-
-        indx=0;
-        for(int i=0;i<4;i++){
-            for(int j=0;j<2;j++){
-                moveUp[indx]=tempUp[i][j];
-                moveDown[indx]=tempDown[i][j];
-                indx++;
-            }
-        }
-
-        RightMovement = new Animation(0.08f,moveRight);
-        LeftMovement = new Animation(0.08f,moveLeft);
-        UpMovement = new Animation(0.08f,moveUp);
-        DownMovement = new Animation(0.08f,moveDown);
-
-
-        RightSwordMovement = new Animation(0.08f,RightSword);
-        LeftSwordMovement = new Animation(0.08f,LeftSword);
-        UpSwordMovement = new Animation(0.08f,UpSword);
-        DownSwordMovement = new Animation(0.08f,DownSword);
 
         SoundManager.create();
         SoundManager.MainTheme.setLooping(true);
@@ -195,7 +124,7 @@ public class InsideStart implements Screen {
                 obstacleDetectionConditionRight rightCheck = new obstacleDetectionConditionRight();
                 HeroX = rightCheck.check(HeroX, HeroY, obs5, obs6, obs7, obs8, obs9, obs10, obs11, obs12, obs14, obs15, obs16, obs17, obs17_bridge, obs18, obs19, obs20, obs21, obs22, obs23, obs24, obs25, obs26);
             }
-            game.batch.draw((TextureRegion) RightMovement.getKeyFrame(time,true),HeroX,HeroY);
+            game.batch.draw((TextureRegion) link.RightMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
         else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
@@ -221,7 +150,7 @@ public class InsideStart implements Screen {
                 obstacleDetectionCondtionLeft leftCheck = new obstacleDetectionCondtionLeft();
                 HeroX = leftCheck.check(HeroX,HeroY,obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs26);
             }
-            game.batch.draw((TextureRegion) LeftMovement.getKeyFrame(time,true),HeroX,HeroY);
+            game.batch.draw((TextureRegion) link.LeftMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
         else if(Gdx.input.isKeyPressed(Input.Keys.UP)){
@@ -233,7 +162,8 @@ public class InsideStart implements Screen {
             HeroY+=4;
             obstacleDetectionConditionUp upCheck = new obstacleDetectionConditionUp();
             HeroY=upCheck.check(HeroX,HeroY,obs2,obs3,obs4,obs5,obs7,obs8,obs9,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
-            game.batch.draw((TextureRegion) UpMovement.getKeyFrame(time,true),HeroX,HeroY);
+            game.batch.draw((TextureRegion) link.UpMovement.getKeyFrame(time,true),HeroX,HeroY);
+            //game.batch.draw((TextureRegion) UpMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
         else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
@@ -245,14 +175,14 @@ public class InsideStart implements Screen {
             HeroY-=4;
             obstacleDetectionCondtionDown downCheck = new obstacleDetectionCondtionDown();
             HeroY = downCheck.check(HeroX,HeroY,obs1,obs4,obs5,obs6,obs7,obs8,obs9,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
-            game.batch.draw((TextureRegion) DownMovement.getKeyFrame(time,true),HeroX,HeroY);
+            game.batch.draw((TextureRegion) link.DownMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
         else if(Gdx.input.isKeyPressed(Input.Keys.A)){ // sword animation
-            if(RightStand) game.batch.draw((TextureRegion)RightSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
-            else if(LeftStand) game.batch.draw((TextureRegion)LeftSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
-            else if(UpStand) game.batch.draw((TextureRegion)UpSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
-            else if(DownStand) game.batch.draw((TextureRegion)DownSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
+            if(RightStand) game.batch.draw((TextureRegion)link.RightSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
+            else if(LeftStand) game.batch.draw((TextureRegion)link.LeftSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
+            else if(UpStand) game.batch.draw((TextureRegion)link.UpSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
+            else if(DownStand) game.batch.draw((TextureRegion)link.DownSwordMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
         else if(RightStand) game.batch.draw(new Texture("Stand_Right.png"),HeroX,HeroY);
