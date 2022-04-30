@@ -74,7 +74,19 @@ public class InsideStart implements Screen {
     obstacle25 obs25=new obstacle25();
     obstacle26 obs26=new obstacle26();
 
+    //Animation of Hero
     LinksAnimation link = new LinksAnimation();
+
+    //obstacle coordinate change
+    obstacleCordinateChangeXneg negChange = new obstacleCordinateChangeXneg();
+    obstacleCordinateChangeXpos posChange = new obstacleCordinateChangeXpos();
+
+    //obstacle Detection
+    obstacleDetectionConditionRight rightCheck = new obstacleDetectionConditionRight();
+    obstacleDetectionCondtionLeft leftCheck = new obstacleDetectionCondtionLeft();
+    obstacleDetectionConditionUp upCheck = new obstacleDetectionConditionUp();
+    obstacleDetectionCondtionDown downCheck = new obstacleDetectionCondtionDown();
+
     public boolean soundState;
     public InsideStart(MainGame game,boolean soundState){
         this.game=game;
@@ -113,17 +125,15 @@ public class InsideStart implements Screen {
                     HeroX+=4;
                 }
                 else{
-                    new obstacleCordinateChangeXneg().change(obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs10,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
+                    negChange.change(obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs10,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
                     HeroLeftLimit-=4;
                 }
 
             }
             else HeroX+=4;
             if(HeroX>HeroRightLimit) HeroX=HeroRightLimit;
-            else{
-                obstacleDetectionConditionRight rightCheck = new obstacleDetectionConditionRight();
-                HeroX = rightCheck.check(HeroX, HeroY, obs5, obs6, obs7, obs8, obs9, obs10, obs11, obs12, obs14, obs15, obs16, obs17, obs17_bridge, obs18, obs19, obs20, obs21, obs22, obs23, obs24, obs25, obs26);
-            }
+            else HeroX = rightCheck.check(HeroX, HeroY, obs5, obs6, obs7, obs8, obs9, obs10, obs11, obs12, obs14, obs15, obs16, obs17, obs17_bridge, obs18, obs19, obs20, obs21, obs22, obs23, obs24, obs25, obs26);
+
             game.batch.draw((TextureRegion) link.RightMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
@@ -140,16 +150,14 @@ public class InsideStart implements Screen {
                     HeroX-=4;
                 }
                 else{
-                    new obstacleCordinateChangeXpos().change(obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs10,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
+                    posChange.change(obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs10,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
                     HeroLeftLimit+=4;
                 }
             }
             else HeroX-=4;
             if(HeroX< HeroLeftLimit) HeroX=HeroLeftLimit;
-            else{
-                obstacleDetectionCondtionLeft leftCheck = new obstacleDetectionCondtionLeft();
-                HeroX = leftCheck.check(HeroX,HeroY,obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs26);
-            }
+            else HeroX = leftCheck.check(HeroX,HeroY,obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs26);
+
             game.batch.draw((TextureRegion) link.LeftMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
@@ -160,7 +168,6 @@ public class InsideStart implements Screen {
             UpStand=true;
             DownStand=false;
             HeroY+=4;
-            obstacleDetectionConditionUp upCheck = new obstacleDetectionConditionUp();
             HeroY=upCheck.check(HeroX,HeroY,obs2,obs3,obs4,obs5,obs7,obs8,obs9,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
             game.batch.draw((TextureRegion) link.UpMovement.getKeyFrame(time,true),HeroX,HeroY);
             //game.batch.draw((TextureRegion) UpMovement.getKeyFrame(time,true),HeroX,HeroY);
@@ -173,7 +180,6 @@ public class InsideStart implements Screen {
             UpStand=false;
             DownStand=true;
             HeroY-=4;
-            obstacleDetectionCondtionDown downCheck = new obstacleDetectionCondtionDown();
             HeroY = downCheck.check(HeroX,HeroY,obs1,obs4,obs5,obs6,obs7,obs8,obs9,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
             game.batch.draw((TextureRegion) link.DownMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
