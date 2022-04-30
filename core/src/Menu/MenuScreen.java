@@ -29,6 +29,7 @@ public class MenuScreen implements Screen {
     final int[] circleY = new int[]{320,272,224,176,130};
 
     int circleIndx=0;
+    
 
     public boolean soundState=true;
 
