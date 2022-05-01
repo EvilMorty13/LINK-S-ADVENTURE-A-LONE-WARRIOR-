@@ -5,17 +5,18 @@ import ObstacleDetection.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MainGame;
-import jdk.tools.jmod.Main;
 import obstacleCordinateChange.*;
 import obstacleDetectionConditon.*;
 import HerosAnimation.*;
 import Sound.*;
+import BombAnimation.*;
+import BombCordinateChange.*;
+
+import java.util.ArrayList;
 
 public class InsideStart implements Screen {
     MainGame game;
@@ -77,6 +78,11 @@ public class InsideStart implements Screen {
     //Animation of Hero
     LinksAnimation link = new LinksAnimation();
 
+    //Bomb animation
+    ArrayList<Bomb> bombs;
+    BombCoordinateChangePos bombPosChange = new BombCoordinateChangePos();
+    BombCoordinateChangeNeg bombNegChange = new BombCoordinateChangeNeg();
+
     //obstacle coordinate change
     obstacleCordinateChangeXneg negChange = new obstacleCordinateChangeXneg();
     obstacleCordinateChangeXpos posChange = new obstacleCordinateChangeXpos();
@@ -91,12 +97,11 @@ public class InsideStart implements Screen {
     public InsideStart(MainGame game,boolean soundState){
         this.game=game;
         this.soundState=soundState;
-
         SoundManager.create();
         SoundManager.MainTheme.setLooping(true);
         SoundManager.MainTheme.setVolume(0.1f);
         if(soundState) SoundManager.MainTheme.play();
-
+        bombs = new ArrayList<Bomb>();
     }
 
     @Override
@@ -112,6 +117,25 @@ public class InsideStart implements Screen {
         game.batch.begin();
         game.batch.draw(gameMap,gameMapX,gameMapY,gameMapWidth,gameMapHight);
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.B)){
+            this.dispose();
+            SoundManager.MenuBack.play();
+            game.setScreen(new MenuScreen(game,soundState));
+        }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.D)){
+            bombs.add(new Bomb(HeroX,HeroY));
+        }
+        ArrayList<Bomb> toRemove = new ArrayList<Bomb>();
+        for(Bomb b : bombs){
+            b.update(0.02f);
+            if(b.remove) toRemove.add(b);
+        }
+        bombs.removeAll(toRemove);
+        for(Bomb b : bombs){
+            b.render(game.batch);
+        }
+
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
 
             RightStand=true;
@@ -126,6 +150,7 @@ public class InsideStart implements Screen {
                 }
                 else{
                     negChange.change(obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs10,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
+                    bombPosChange.change(bombs);
                     HeroLeftLimit-=4;
                 }
 
@@ -151,6 +176,7 @@ public class InsideStart implements Screen {
                 }
                 else{
                     posChange.change(obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs10,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
+                    bombNegChange.change(bombs);
                     HeroLeftLimit+=4;
                 }
             }
@@ -170,7 +196,6 @@ public class InsideStart implements Screen {
             HeroY+=4;
             HeroY=upCheck.check(HeroX,HeroY,obs2,obs3,obs4,obs5,obs7,obs8,obs9,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
             game.batch.draw((TextureRegion) link.UpMovement.getKeyFrame(time,true),HeroX,HeroY);
-            //game.batch.draw((TextureRegion) UpMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
         else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
@@ -195,12 +220,6 @@ public class InsideStart implements Screen {
         else if(LeftStand) game.batch.draw(new Texture("Stand_Left.png"),HeroX,HeroY);
         else if(UpStand) game.batch.draw(new Texture("Stand_Up.png"),HeroX,HeroY);
         else if(DownStand) game.batch.draw(new Texture("Stand_Down.png"),HeroX,HeroY);
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.B)){
-            this.dispose();
-            SoundManager.MenuBack.play();
-            game.setScreen(new MenuScreen(game,soundState));
-        }
 
         game.batch.end();
     }
