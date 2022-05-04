@@ -91,11 +91,11 @@ public class InsideStart implements Screen {
     ArrayList<enemiesHorizontalMovement> enemies;
     enemiesPosChange enPosChange = new enemiesPosChange();
     enemiesNegChange enNegChange = new enemiesNegChange();
-    enemy1 en1 = new enemy1();
+    enemyH1 enH1 = new enemyH1();
 
     //Enemies Vertical moves
     ArrayList<enemiesVerticalMovement> enemies2;
-    enemy01 en01 = new enemy01();
+    enemyV1 enV1 = new enemyV1();
 
     //obstacle coordinate change
     obstacleCordinateChangeXneg negChange = new obstacleCordinateChangeXneg();
@@ -119,8 +119,8 @@ public class InsideStart implements Screen {
         enemies = new ArrayList<enemiesHorizontalMovement>();
         enemies2 = new ArrayList<enemiesVerticalMovement>();
 
-        enemies.add(new enemiesHorizontalMovement(en1.posX, en1.posY, en1.limX1, en1.limX2));
-        enemies2.add(new enemiesVerticalMovement(en01.posX, en01.posY, en01.limY1, en01.limY2));
+        enemies.add(new enemiesHorizontalMovement(enH1.posX, enH1.posY, enH1.limX1, enH1.limX2));
+        enemies2.add(new enemiesVerticalMovement(enV1.posX, enV1.posY, enV1.limY1, enV1.limY2));
     }
 
     @Override

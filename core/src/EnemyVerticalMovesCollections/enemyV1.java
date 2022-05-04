@@ -1,6 +1,6 @@
 package EnemyVerticalMovesCollections;
 
-public class enemy01 {
+public class enemyV1 {
     public float posX=510;
     public float posY=420;
     public float limY1=390;
