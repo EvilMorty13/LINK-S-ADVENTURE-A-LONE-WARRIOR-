@@ -134,6 +134,7 @@ public class InsideStart implements Screen {
         enemies = new ArrayList<enemiesHorizontalMovement>();
         enemies2 = new ArrayList<enemiesVerticalMovement>();
 
+        //Horizontal Enemies
         enemies.add(new enemiesHorizontalMovement(enH1.posX, enH1.posY, enH1.limX1, enH1.limX2));
         enemies.add(new enemiesHorizontalMovement(enH2.posX, enH2.posY, enH2.limX1, enH2.limX2));
         enemies.add(new enemiesHorizontalMovement(enH3.posX, enH3.posY, enH3.limX1, enH3.limX2));
@@ -143,7 +144,7 @@ public class InsideStart implements Screen {
         enemies.add(new enemiesHorizontalMovement(enH7.posX, enH7.posY, enH7.limX1, enH7.limX2));
         enemies.add(new enemiesHorizontalMovement(enH8.posX, enH8.posY, enH8.limX1, enH8.limX2));
 
-
+        //Vertical Enemies
         enemies2.add(new enemiesVerticalMovement(enV1.posX, enV1.posY, enV1.limY1, enV1.limY2));
         enemies2.add(new enemiesVerticalMovement(enV2.posX, enV2.posY, enV2.limY1, enV2.limY2));
         enemies2.add(new enemiesVerticalMovement(enV3.posX, enV3.posY, enV3.limY1, enV3.limY2));
@@ -153,6 +154,7 @@ public class InsideStart implements Screen {
         enemies2.add(new enemiesVerticalMovement(enV7.posX, enV7.posY, enV7.limY1, enV7.limY2));
         enemies2.add(new enemiesVerticalMovement(enV8.posX, enV8.posY, enV8.limY1, enV8.limY2));
         enemies2.add(new enemiesVerticalMovement(enV9.posX, enV9.posY, enV9.limY1, enV9.limY2));
+
     }
 
     @Override
