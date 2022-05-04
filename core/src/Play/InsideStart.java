@@ -15,6 +15,10 @@ import HerosAnimation.*;
 import Sound.*;
 import BombAnimation.*;
 import BombCordinateChange.*;
+import EnemyHorizontalMovesCollections.*;
+import EnemyVerticalMovesCollections.*;
+import EnemyMovement.*;
+import EnemiesCordinateChange.*;
 
 import java.util.ArrayList;
 
@@ -83,6 +87,16 @@ public class InsideStart implements Screen {
     BombCoordinateChangePos bombPosChange = new BombCoordinateChangePos();
     BombCoordinateChangeNeg bombNegChange = new BombCoordinateChangeNeg();
 
+    //Enemies Horizontal moves
+    ArrayList<enemiesHorizontalMovement> enemies;
+    enemiesPosChange enPosChange = new enemiesPosChange();
+    enemiesNegChange enNegChange = new enemiesNegChange();
+    enemy1 en1 = new enemy1();
+
+    //Enemies Vertical moves
+    ArrayList<enemiesVerticalMovement> enemies2;
+    enemy01 en01 = new enemy01();
+
     //obstacle coordinate change
     obstacleCordinateChangeXneg negChange = new obstacleCordinateChangeXneg();
     obstacleCordinateChangeXpos posChange = new obstacleCordinateChangeXpos();
@@ -102,6 +116,11 @@ public class InsideStart implements Screen {
         SoundManager.MainTheme.setVolume(0.1f);
         if(soundState) SoundManager.MainTheme.play();
         bombs = new ArrayList<Bomb>();
+        enemies = new ArrayList<enemiesHorizontalMovement>();
+        enemies2 = new ArrayList<enemiesVerticalMovement>();
+
+        enemies.add(new enemiesHorizontalMovement(en1.posX, en1.posY, en1.limX1, en1.limX2));
+        enemies2.add(new enemiesVerticalMovement(en01.posX, en01.posY, en01.limY1, en01.limY2));
     }
 
     @Override
@@ -151,6 +170,8 @@ public class InsideStart implements Screen {
                 else{
                     negChange.change(obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs10,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
                     bombPosChange.change(bombs);
+                    enPosChange.change(enemies);
+                    enPosChange.change2(enemies2);
                     HeroLeftLimit-=4;
                 }
 
@@ -177,6 +198,8 @@ public class InsideStart implements Screen {
                 else{
                     posChange.change(obs3,obs4,obs5,obs6,obs7,obs8,obs9,obs10,obs11,obs12,obs14,obs15,obs16,obs17,obs17_bridge,obs18,obs19,obs20,obs21,obs22,obs23,obs24,obs25,obs26);
                     bombNegChange.change(bombs);
+                    enNegChange.change(enemies);
+                    enNegChange.change2(enemies2);
                     HeroLeftLimit+=4;
                 }
             }
@@ -220,6 +243,15 @@ public class InsideStart implements Screen {
         else if(LeftStand) game.batch.draw(new Texture("Stand_Left.png"),HeroX,HeroY);
         else if(UpStand) game.batch.draw(new Texture("Stand_Up.png"),HeroX,HeroY);
         else if(DownStand) game.batch.draw(new Texture("Stand_Down.png"),HeroX,HeroY);
+
+        for(enemiesHorizontalMovement e : enemies){
+            e.update(0.1f);
+            e.render(game.batch);
+        }
+        for(enemiesVerticalMovement e : enemies2){
+            e.update(0.1f);
+            e.render(game.batch);
+        }
 
         game.batch.end();
     }
