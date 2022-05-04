@@ -92,10 +92,25 @@ public class InsideStart implements Screen {
     enemiesPosChange enPosChange = new enemiesPosChange();
     enemiesNegChange enNegChange = new enemiesNegChange();
     enemyH1 enH1 = new enemyH1();
+    enemyH2 enH2 = new enemyH2();
+    enemyH3 enH3 = new enemyH3();
+    enemyH4 enH4 = new enemyH4();
+    enemyH5 enH5 = new enemyH5();
+    enemyH6 enH6 = new enemyH6();
+    enemyH7 enH7 = new enemyH7();
+    enemyH8 enH8 = new enemyH8();
 
     //Enemies Vertical moves
     ArrayList<enemiesVerticalMovement> enemies2;
     enemyV1 enV1 = new enemyV1();
+    enemyV2 enV2 = new enemyV2();
+    enemyV3 enV3 = new enemyV3();
+    enemyV4 enV4 = new enemyV4();
+    enemyV5 enV5 = new enemyV5();
+    enemyV6 enV6 = new enemyV6();
+    enemyV7 enV7 = new enemyV7();
+    enemyV8 enV8 = new enemyV8();
+    enemyV9 enV9 = new enemyV9();
 
     //obstacle coordinate change
     obstacleCordinateChangeXneg negChange = new obstacleCordinateChangeXneg();
@@ -120,12 +135,29 @@ public class InsideStart implements Screen {
         enemies2 = new ArrayList<enemiesVerticalMovement>();
 
         enemies.add(new enemiesHorizontalMovement(enH1.posX, enH1.posY, enH1.limX1, enH1.limX2));
+        enemies.add(new enemiesHorizontalMovement(enH2.posX, enH2.posY, enH2.limX1, enH2.limX2));
+        enemies.add(new enemiesHorizontalMovement(enH3.posX, enH3.posY, enH3.limX1, enH3.limX2));
+        enemies.add(new enemiesHorizontalMovement(enH4.posX, enH4.posY, enH4.limX1, enH4.limX2));
+        enemies.add(new enemiesHorizontalMovement(enH5.posX, enH5.posY, enH5.limX1, enH5.limX2));
+        enemies.add(new enemiesHorizontalMovement(enH6.posX, enH6.posY, enH6.limX1, enH6.limX2));
+        enemies.add(new enemiesHorizontalMovement(enH7.posX, enH7.posY, enH7.limX1, enH7.limX2));
+        enemies.add(new enemiesHorizontalMovement(enH8.posX, enH8.posY, enH8.limX1, enH8.limX2));
+
+
         enemies2.add(new enemiesVerticalMovement(enV1.posX, enV1.posY, enV1.limY1, enV1.limY2));
+        enemies2.add(new enemiesVerticalMovement(enV2.posX, enV2.posY, enV2.limY1, enV2.limY2));
+        enemies2.add(new enemiesVerticalMovement(enV3.posX, enV3.posY, enV3.limY1, enV3.limY2));
+        enemies2.add(new enemiesVerticalMovement(enV4.posX, enV4.posY, enV4.limY1, enV4.limY2));
+        enemies2.add(new enemiesVerticalMovement(enV5.posX, enV5.posY, enV5.limY1, enV5.limY2));
+        enemies2.add(new enemiesVerticalMovement(enV6.posX, enV6.posY, enV6.limY1, enV6.limY2));
+        enemies2.add(new enemiesVerticalMovement(enV7.posX, enV7.posY, enV7.limY1, enV7.limY2));
+        enemies2.add(new enemiesVerticalMovement(enV8.posX, enV8.posY, enV8.limY1, enV8.limY2));
+        enemies2.add(new enemiesVerticalMovement(enV9.posX, enV9.posY, enV9.limY1, enV9.limY2));
     }
 
     @Override
     public void show() {
-        gameMap=new Texture("ultraFinalMap.png");
+        gameMap=new Texture("FM.png");
     }
 
     @Override
