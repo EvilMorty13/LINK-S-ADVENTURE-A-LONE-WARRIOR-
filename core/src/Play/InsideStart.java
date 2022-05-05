@@ -222,11 +222,11 @@ public class InsideStart implements Screen {
         else if(DownStand) game.batch.draw(new Texture("Stand_Down.png"),HeroX,HeroY);
 
         for(enemiesHorizontalMovement e : enemies){
-            e.update(0.1f);
+            e.update(0.1f,HeroX,HeroY);
             e.render(game.batch);
         }
         for(enemiesVerticalMovement e : enemies2){
-            e.update(0.1f);
+            e.update(0.1f,HeroX,HeroY);
             e.render(game.batch);
         }
 
