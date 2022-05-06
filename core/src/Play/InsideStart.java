@@ -19,6 +19,7 @@ import EnemyMovement.*;
 import EnemiesCordinateChange.*;
 import obstacles.*;
 import Enemies.*;
+import BombCounter.*;
 
 import java.util.ArrayList;
 
@@ -69,6 +70,10 @@ public class InsideStart implements Screen {
     //Enemies Vertical moves
     ArrayList<enemiesVerticalMovement> enemies2;
 
+    //Bomb counter
+    ArrayList<showBomb> bombShow = new ArrayList<>();
+    int bombCounter=5;
+
     //obstacle coordinate change
     obstacleCordinateChangeXneg negChange = new obstacleCordinateChangeXneg();
     obstacleCordinateChangeXpos posChange = new obstacleCordinateChangeXpos();
@@ -96,6 +101,9 @@ public class InsideStart implements Screen {
 
         //Vertical Enemies
         enemies2 = new VerticalEnemies().get();
+
+        //Bombs show
+        bombShow = new bombList().get();
     }
 
     @Override
@@ -110,10 +118,27 @@ public class InsideStart implements Screen {
         ScreenUtils.clear(0,1,1,1);
         game.batch.begin();
         game.batch.draw(gameMap,gameMapX,gameMapY,gameMapWidth,gameMapHight);
+
+        ArrayList<showBomb> showBombRemove = new ArrayList<>();
+        for(showBomb b : bombShow){
+            if(b.index==bombCounter+1) showBombRemove.add(b);
+            b.render(game.batch);
+        }bombShow.removeAll(showBombRemove);
+
+        for(Bomb b : bombs){
+            b.render(game.batch);
+        }
+
+
         ArrayList<enemiesHorizontalMovement> Removed = new ArrayList<>();
         for(enemiesHorizontalMovement e : enemies){
             e.update(0.1f,HeroX,HeroY);
             if(e.remove) Removed.add(e);
+            if(e.enemyAttack>=100){
+                HeroX=40;
+                HeroY=40;
+                e.enemyAttack=0;
+            }
             e.render(game.batch);
         }
         enemies.removeAll(Removed);
@@ -122,6 +147,11 @@ public class InsideStart implements Screen {
         for(enemiesVerticalMovement e : enemies2){
             e.update(0.1f,HeroX,HeroY);
             if(e.remove) Removed2.add(e);
+            if(e.enemyAttack>=100){
+                HeroX=40;
+                HeroY=40;
+                e.enemyAttack=0;
+            }
             e.render(game.batch);
         }
         enemies2.removeAll(Removed2);
@@ -133,17 +163,28 @@ public class InsideStart implements Screen {
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.D)){
-            bombs.add(new Bomb(HeroX,HeroY));
+            if(bombCounter>0) bombs.add(new Bomb(HeroX,HeroY));
+            bombCounter--;
         }
         ArrayList<Bomb> toRemove = new ArrayList<Bomb>();
+
         for(Bomb b : bombs){
             b.update(0.02f);
-            if(b.remove) toRemove.add(b);
+            for(enemiesHorizontalMovement e : enemies){
+                if(e.posX>=b.x-b.damageLimit && e.posX<=b.x+b.damageLimit && e.posY>=b.y-b.damageLimit && e.posY<=b.y+b.damageLimit) Removed.add(e);
+            }
+            for(enemiesVerticalMovement e : enemies2){
+                if(e.posX>=b.x-b.damageLimit && e.posX<=b.x+b.damageLimit && e.posY>=b.y-b.damageLimit && e.posY<=b.y+b.damageLimit) Removed2.add(e);
+            }
+            if(b.remove){
+                toRemove.add(b);
+                enemies.removeAll(Removed);
+                enemies2.removeAll(Removed2);
+            }
         }
         bombs.removeAll(toRemove);
-        for(Bomb b : bombs){
-            b.render(game.batch);
-        }
+
+
 
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
 

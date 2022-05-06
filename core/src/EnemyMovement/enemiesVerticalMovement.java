@@ -10,17 +10,23 @@ public class enemiesVerticalMovement {
     public float posX,posY;
     public float limY1,limY2;
     float HeroX,HeroY;
+
     Animation upMoves=null;
     Animation downMoves=null;
     Animation rightSword;
     Animation leftSword;
     Animation upSword;
     Animation downSword;
+
     float movementTime;
+
     boolean movement=true;
     boolean upSide=true;
     boolean downSide=false;
+
     public int linkAttack=0;
+    public int enemyAttack=0;
+
     public boolean remove=false;
     public boolean attack=false,rightAttack=false,leftAttack=false,upAttack=false,downAttack=false;
     public enemiesVerticalMovement(float posX,float posY,float limY1,float limY2){
@@ -157,16 +163,24 @@ public class enemiesVerticalMovement {
             else if(downSide) batch.draw((TextureRegion) downMoves.getKeyFrame(movementTime,true),posX,posY);
         }
         else if(attack){
-            if(rightAttack) batch.draw((TextureRegion) rightSword.getKeyFrame(movementTime,true),posX,posY);
-            else if(leftAttack) batch.draw((TextureRegion) leftSword.getKeyFrame(movementTime,true),posX,posY);
+            if(rightAttack){
+                if(rightSword.isAnimationFinished(movementTime)) enemyAttack++;
+                batch.draw((TextureRegion) rightSword.getKeyFrame(movementTime,true),posX,posY);
+            }
+            else if(leftAttack) {
+                if(leftSword.isAnimationFinished(movementTime)) enemyAttack++;
+                batch.draw((TextureRegion) leftSword.getKeyFrame(movementTime, true), posX, posY);
+            }
             else if(upAttack){
                 upSide=true;
                 downSide=false;
+                if(upSword.isAnimationFinished(movementTime)) enemyAttack++;
                 batch.draw((TextureRegion) upSword.getKeyFrame(movementTime,true),posX,posY);
             }
             else if(downAttack){
                 downSide=true;
                 upSide=false;
+                if(downSword.isAnimationFinished(movementTime)) enemyAttack++;
                 batch.draw((TextureRegion) downSword.getKeyFrame(movementTime,true),posX,posY);
             }
         }

@@ -11,6 +11,7 @@ public class enemiesHorizontalMovement {
     public float limX1,limX2;
 
     public int linkAttack=0;
+    public int enemyAttack=0;
 
     Animation rightMoves;
     Animation leftMoves;
@@ -84,7 +85,7 @@ public class enemiesHorizontalMovement {
                 leftAttack=false;
                 upAttack=true;
                 downAttack=false;
-                //if(linkAttack>=10) remove=true;
+                System.out.println("Enemy attack :: "+enemyAttack);
             }
             else if(HeroY<posY && HeroY>=rangeY1){
                 movement=false;
@@ -93,7 +94,6 @@ public class enemiesHorizontalMovement {
                 leftAttack=false;
                 upAttack=false;
                 downAttack=true;
-                //if(linkAttack>=10) remove=true;
             }
             else{
                 movement = true;
@@ -112,7 +112,6 @@ public class enemiesHorizontalMovement {
                 leftAttack=false;
                 upAttack=false;
                 downAttack=false;
-                //if(linkAttack>=10) remove=true;
             }
             else if(HeroX>=rangeX1 && HeroX<posX){
                 movement=false;
@@ -121,7 +120,6 @@ public class enemiesHorizontalMovement {
                 leftAttack=true;
                 upAttack=false;
                 downAttack=false;
-                //if(linkAttack>=10) remove=true;
             }
             else{
                 movement = true;
@@ -171,15 +169,24 @@ public class enemiesHorizontalMovement {
             if(rightAttack){
                 rightSide=true;
                 leftSide=false;
+                if(rightSword.isAnimationFinished(movementTime)) enemyAttack++;
                 batch.draw((TextureRegion) rightSword.getKeyFrame(movementTime,true),posX,posY);
             }
             else if(leftAttack){
                 leftSide=true;
                 rightSide=false;
+                if(leftSword.isAnimationFinished(movementTime)) enemyAttack++;
                 batch.draw((TextureRegion) leftSword.getKeyFrame(movementTime,true),posX,posY);
             }
-            else if(upAttack) batch.draw((TextureRegion) upSword.getKeyFrame(movementTime,true),posX,posY);
-            else if(downAttack) batch.draw((TextureRegion) downSword.getKeyFrame(movementTime,true),posX,posY);
+            else if(upAttack) {
+                if(upSword.isAnimationFinished(movementTime)) enemyAttack++;
+                batch.draw((TextureRegion) upSword.getKeyFrame(movementTime, true), posX, posY);
+            }
+            else if(downAttack){
+                if(downSword.isAnimationFinished(movementTime)) enemyAttack++;
+                batch.draw((TextureRegion) downSword.getKeyFrame(movementTime,true),posX,posY);
+            }
+
         }
     }
 }
