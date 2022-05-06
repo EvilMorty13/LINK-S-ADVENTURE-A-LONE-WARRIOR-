@@ -1,5 +1,6 @@
 package EnemyMovement;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,18 +9,26 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class enemiesHorizontalMovement {
     public float posX,posY;
     public float limX1,limX2;
+
+    public int linkAttack=0;
+
     Animation rightMoves;
     Animation leftMoves;
     Animation rightSword;
     Animation leftSword;
     Animation upSword;
     Animation downSword;
+
     float movementTime;
     float HeroX,HeroY;
-    boolean movement=true;
+
+    public boolean movement=true;
     boolean rightSide=true;
     boolean leftSide=false;
-    boolean attack=false,rightAttack=false,leftAttack=false,upAttack=false,downAttack=false;
+
+    public boolean remove=false;
+    public boolean attack=false,rightAttack=false,leftAttack=false,upAttack=false,downAttack=false;
+
     public enemiesHorizontalMovement(float posX,float posY,float limX1,float limX2){
         this.posX=posX;
         this.posY=posY;
@@ -75,7 +84,7 @@ public class enemiesHorizontalMovement {
                 leftAttack=false;
                 upAttack=true;
                 downAttack=false;
-
+                //if(linkAttack>=10) remove=true;
             }
             else if(HeroY<posY && HeroY>=rangeY1){
                 movement=false;
@@ -84,6 +93,7 @@ public class enemiesHorizontalMovement {
                 leftAttack=false;
                 upAttack=false;
                 downAttack=true;
+                //if(linkAttack>=10) remove=true;
             }
             else{
                 movement = true;
@@ -102,6 +112,7 @@ public class enemiesHorizontalMovement {
                 leftAttack=false;
                 upAttack=false;
                 downAttack=false;
+                //if(linkAttack>=10) remove=true;
             }
             else if(HeroX>=rangeX1 && HeroX<posX){
                 movement=false;
@@ -110,6 +121,7 @@ public class enemiesHorizontalMovement {
                 leftAttack=true;
                 upAttack=false;
                 downAttack=false;
+                //if(linkAttack>=10) remove=true;
             }
             else{
                 movement = true;
@@ -119,6 +131,7 @@ public class enemiesHorizontalMovement {
                 upAttack = false;
                 downAttack = false;
             }
+
         }
         else{
             movement=true;
@@ -144,6 +157,10 @@ public class enemiesHorizontalMovement {
                 }
             }
         }
+        if(linkAttack>=50){
+            remove=true;
+            linkAttack=0;
+        }
     }
     public void render(SpriteBatch batch){
         if(movement){
@@ -164,6 +181,5 @@ public class enemiesHorizontalMovement {
             else if(upAttack) batch.draw((TextureRegion) upSword.getKeyFrame(movementTime,true),posX,posY);
             else if(downAttack) batch.draw((TextureRegion) downSword.getKeyFrame(movementTime,true),posX,posY);
         }
-
     }
 }
