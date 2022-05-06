@@ -20,7 +20,9 @@ public class enemiesVerticalMovement {
     boolean movement=true;
     boolean upSide=true;
     boolean downSide=false;
-    boolean attack=false,rightAttack=false,leftAttack=false,upAttack=false,downAttack=false;
+    public int linkAttack=0;
+    public boolean remove=false;
+    public boolean attack=false,rightAttack=false,leftAttack=false,upAttack=false,downAttack=false;
     public enemiesVerticalMovement(float posX,float posY,float limY1,float limY2){
         this.posX=posX;
         this.posY=posY;
@@ -143,6 +145,10 @@ public class enemiesVerticalMovement {
                     downSide=false;
                 }
             }
+        }
+        if(linkAttack>=50){
+            remove=true;
+            linkAttack=0;
         }
     }
     public void render(SpriteBatch batch){

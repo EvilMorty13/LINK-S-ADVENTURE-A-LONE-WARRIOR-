@@ -212,10 +212,16 @@ public class InsideStart implements Screen {
                 for(enemiesHorizontalMovement e : enemies){
                     if(e.attack && e.leftAttack && link.RightSwordMovement.isAnimationFinished(time)) e.linkAttack++;
                 }
+                for(enemiesVerticalMovement e : enemies2){
+                    if(e.attack && e.leftAttack && link.RightSwordMovement.isAnimationFinished(time)) e.linkAttack++;
+                }
                 game.batch.draw((TextureRegion) link.RightSwordMovement.getKeyFrame(time, true), HeroX, HeroY);
             }
             else if(LeftStand) {
                 for(enemiesHorizontalMovement e : enemies){
+                    if(e.attack && e.rightAttack && link.LeftSwordMovement.isAnimationFinished(time)) e.linkAttack++;
+                }
+                for(enemiesVerticalMovement e : enemies2){
                     if(e.attack && e.rightAttack && link.LeftSwordMovement.isAnimationFinished(time)) e.linkAttack++;
                 }
                 game.batch.draw((TextureRegion) link.LeftSwordMovement.getKeyFrame(time, true), HeroX, HeroY);
@@ -224,10 +230,16 @@ public class InsideStart implements Screen {
                 for(enemiesHorizontalMovement e : enemies){
                     if(e.attack && e.downAttack && link.UpSwordMovement.isAnimationFinished(time)) e.linkAttack++;
                 }
+                for(enemiesVerticalMovement e : enemies2){
+                    if(e.attack && e.downAttack && link.UpSwordMovement.isAnimationFinished(time)) e.linkAttack++;
+                }
                 game.batch.draw((TextureRegion) link.UpSwordMovement.getKeyFrame(time, true), HeroX, HeroY);
             }
             else if(DownStand) {
                 for(enemiesHorizontalMovement e : enemies){
+                    if(e.attack && e.upAttack && link.DownSwordMovement.isAnimationFinished(time)) e.linkAttack++;
+                }
+                for(enemiesVerticalMovement e : enemies2){
                     if(e.attack && e.upAttack && link.DownSwordMovement.isAnimationFinished(time)) e.linkAttack++;
                 }
                 game.batch.draw((TextureRegion) link.DownSwordMovement.getKeyFrame(time, true), HeroX, HeroY);
@@ -242,16 +254,18 @@ public class InsideStart implements Screen {
         ArrayList<enemiesHorizontalMovement> Removed = new ArrayList<>();
         for(enemiesHorizontalMovement e : enemies){
             e.update(0.1f,HeroX,HeroY);
-            if(e.remove){
-                Removed.add(e);
-            }
+            if(e.remove) Removed.add(e);
             e.render(game.batch);
         }
         enemies.removeAll(Removed);
+
+        ArrayList<enemiesVerticalMovement> Removed2 = new ArrayList<>();
         for(enemiesVerticalMovement e : enemies2){
             e.update(0.1f,HeroX,HeroY);
+            if(e.remove) Removed2.add(e);
             e.render(game.batch);
         }
+        enemies2.removeAll(Removed2);
 
         game.batch.end();
     }
