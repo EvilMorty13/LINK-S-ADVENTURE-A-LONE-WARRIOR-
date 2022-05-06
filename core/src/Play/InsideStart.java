@@ -20,6 +20,7 @@ import EnemiesCordinateChange.*;
 import obstacles.*;
 import Enemies.*;
 import BombCounter.*;
+import HeartCounter.*;
 
 import java.util.ArrayList;
 
@@ -74,6 +75,10 @@ public class InsideStart implements Screen {
     ArrayList<showBomb> bombShow = new ArrayList<>();
     int bombCounter=5;
 
+    //Heart counter
+    ArrayList<showHeart> hearts = new ArrayList<>();
+    int heartCounter=3;
+
     //obstacle coordinate change
     obstacleCordinateChangeXneg negChange = new obstacleCordinateChangeXneg();
     obstacleCordinateChangeXpos posChange = new obstacleCordinateChangeXpos();
@@ -104,6 +109,10 @@ public class InsideStart implements Screen {
 
         //Bombs show
         bombShow = new bombList().get();
+
+        //Heart show
+        hearts = new heartList().get();
+
     }
 
     @Override
@@ -118,12 +127,6 @@ public class InsideStart implements Screen {
         ScreenUtils.clear(0,1,1,1);
         game.batch.begin();
         game.batch.draw(gameMap,gameMapX,gameMapY,gameMapWidth,gameMapHight);
-
-        ArrayList<showBomb> showBombRemove = new ArrayList<>();
-        for(showBomb b : bombShow){
-            if(b.index==bombCounter+1) showBombRemove.add(b);
-            b.render(game.batch);
-        }bombShow.removeAll(showBombRemove);
 
         for(Bomb b : bombs){
             b.render(game.batch);
@@ -307,7 +310,15 @@ public class InsideStart implements Screen {
         else if(UpStand) game.batch.draw(new Texture("Stand_Up.png"),HeroX,HeroY);
         else if(DownStand) game.batch.draw(new Texture("Stand_Down.png"),HeroX,HeroY);
 
+        for(showHeart h : hearts){
+            h.render(game.batch);
+        }
 
+        ArrayList<showBomb> showBombRemove = new ArrayList<>();
+        for(showBomb b : bombShow){
+            if(b.index==bombCounter+1) showBombRemove.add(b);
+            b.render(game.batch);
+        }bombShow.removeAll(showBombRemove);
 
         game.batch.end();
     }
