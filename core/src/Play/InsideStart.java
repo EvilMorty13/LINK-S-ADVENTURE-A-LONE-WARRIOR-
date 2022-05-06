@@ -110,6 +110,21 @@ public class InsideStart implements Screen {
         ScreenUtils.clear(0,1,1,1);
         game.batch.begin();
         game.batch.draw(gameMap,gameMapX,gameMapY,gameMapWidth,gameMapHight);
+        ArrayList<enemiesHorizontalMovement> Removed = new ArrayList<>();
+        for(enemiesHorizontalMovement e : enemies){
+            e.update(0.1f,HeroX,HeroY);
+            if(e.remove) Removed.add(e);
+            e.render(game.batch);
+        }
+        enemies.removeAll(Removed);
+
+        ArrayList<enemiesVerticalMovement> Removed2 = new ArrayList<>();
+        for(enemiesVerticalMovement e : enemies2){
+            e.update(0.1f,HeroX,HeroY);
+            if(e.remove) Removed2.add(e);
+            e.render(game.batch);
+        }
+        enemies2.removeAll(Removed2);
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.B)){
             this.dispose();
@@ -251,21 +266,7 @@ public class InsideStart implements Screen {
         else if(UpStand) game.batch.draw(new Texture("Stand_Up.png"),HeroX,HeroY);
         else if(DownStand) game.batch.draw(new Texture("Stand_Down.png"),HeroX,HeroY);
 
-        ArrayList<enemiesHorizontalMovement> Removed = new ArrayList<>();
-        for(enemiesHorizontalMovement e : enemies){
-            e.update(0.1f,HeroX,HeroY);
-            if(e.remove) Removed.add(e);
-            e.render(game.batch);
-        }
-        enemies.removeAll(Removed);
 
-        ArrayList<enemiesVerticalMovement> Removed2 = new ArrayList<>();
-        for(enemiesVerticalMovement e : enemies2){
-            e.update(0.1f,HeroX,HeroY);
-            if(e.remove) Removed2.add(e);
-            e.render(game.batch);
-        }
-        enemies2.removeAll(Removed2);
 
         game.batch.end();
     }
