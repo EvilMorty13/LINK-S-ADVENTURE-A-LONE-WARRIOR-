@@ -200,6 +200,7 @@ public class InsideStart implements Screen {
                         checkPointX+=4;
                         HeroLeftLimit+=4;
                         gameMapX+=4;
+                        princessX+=4;
                     }
                 }
                 else if(keyChose==3){
@@ -211,6 +212,7 @@ public class InsideStart implements Screen {
                         keysLocationChange.posChange(keys);
                         checkPointX-=4;
                         HeroLeftLimit-=4;
+                        princessX-=4;
                         gameMapX-=4;
                     }
                 }
@@ -237,6 +239,7 @@ public class InsideStart implements Screen {
                         keysLocationChange.negChange(keys);
                         checkPointX+=4;
                         HeroLeftLimit+=4;
+                        princessX+=4;
                         gameMapX+=4;
                     }
                 }
@@ -249,6 +252,7 @@ public class InsideStart implements Screen {
                         keysLocationChange.posChange(keys);
                         checkPointX-=4;
                         HeroLeftLimit-=4;
+                        princessX-=4;
                         gameMapX-=4;
                     }
                 }

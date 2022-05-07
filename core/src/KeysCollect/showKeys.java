@@ -28,7 +28,7 @@ public class showKeys {
     }
     public void update(float time,float HeroX,float HeroY){
         showTime+=time;
-        if(x>=HeroX-8 && x<=HeroX+8 && y>=HeroY-8 && y<=HeroY+8) remove=true;
+        if(x>=HeroX-15 && x<=HeroX+15 && y>=HeroY-15 && y<=HeroY+15) remove=true;
     }
     public void render(SpriteBatch batch){
         batch.draw((TextureRegion) key.getKeyFrame(showTime,true),x,y);
