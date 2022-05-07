@@ -80,7 +80,7 @@ public class InsideStart implements Screen {
 
     //Heart counter
     ArrayList<showHeart> hearts = new ArrayList<>();
-    int heartCounter=3;
+    int heartCounter=0;
 
     //keys
     ArrayList<showKeys> keys;
@@ -92,6 +92,7 @@ public class InsideStart implements Screen {
     public float mKeysX;
     public float mKeysY;
     float mKeysDiff=30;
+    int keyChose=0;
 
     //obstacle coordinate change
     obstacleCordinateChangeXneg negChange = new obstacleCordinateChangeXneg();
@@ -158,6 +159,7 @@ public class InsideStart implements Screen {
                 removeKeys.add(k);
                 mKeys.add(new menuKeys(mKeysX+mKeysCounter*mKeysDiff,mKeysY));
                 mKeysCounter++;
+                keyChose=k.index;
             }
             k.render(game.batch);
         }keys.removeAll(removeKeys);
@@ -176,9 +178,34 @@ public class InsideStart implements Screen {
             e.update(0.1f,HeroX,HeroY);
             if(e.remove) Removed.add(e);
             if(e.enemyAttack>=100){
+                heartCounter++;
+                e.enemyAttack=0;
+                if(keyChose<3){
+                    while(gameMapX<MapLimitX1-50){
+                        posChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26);
+                        bombNegChange.change(bombs);
+                        enNegChange.change(enemies);
+                        enNegChange.change2(enemies2);
+                        keysLocationChange.negChange(keys);
+                        checkPointX+=4;
+                        HeroLeftLimit+=4;
+                        gameMapX+=4;
+                    }
+                }
+                else if(keyChose==3){
+                    while(gameMapX>MapLimitX2+100){
+                        negChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26);
+                        bombPosChange.change(bombs);
+                        enPosChange.change(enemies);
+                        enPosChange.change2(enemies2);
+                        keysLocationChange.posChange(keys);
+                        checkPointX-=4;
+                        HeroLeftLimit-=4;
+                        gameMapX-=4;
+                    }
+                }
                 HeroX=checkPointX;
                 HeroY=checkPointY;
-                e.enemyAttack=0;
             }
             e.render(game.batch);
         }
@@ -189,9 +216,34 @@ public class InsideStart implements Screen {
             e.update(0.1f,HeroX,HeroY);
             if(e.remove) Removed2.add(e);
             if(e.enemyAttack>=100){
+                heartCounter++;
+                e.enemyAttack=0;
+                if(keyChose<3){
+                    while(gameMapX<MapLimitX1-50){
+                        posChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26);
+                        bombNegChange.change(bombs);
+                        enNegChange.change(enemies);
+                        enNegChange.change2(enemies2);
+                        keysLocationChange.negChange(keys);
+                        checkPointX+=4;
+                        HeroLeftLimit+=4;
+                        gameMapX+=4;
+                    }
+                }
+                else if(keyChose==3){
+                    while(gameMapX>MapLimitX2+100){
+                        negChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26);
+                        bombPosChange.change(bombs);
+                        enPosChange.change(enemies);
+                        enPosChange.change2(enemies2);
+                        keysLocationChange.posChange(keys);
+                        checkPointX-=4;
+                        HeroLeftLimit-=4;
+                        gameMapX-=4;
+                    }
+                }
                 HeroX=checkPointX;
                 HeroY=checkPointY;
-                e.enemyAttack=0;
             }
             e.render(game.batch);
         }
@@ -221,6 +273,11 @@ public class InsideStart implements Screen {
                 toRemove.add(b);
                 enemies.removeAll(Removed);
                 enemies2.removeAll(Removed2);
+                if(HeroX>=b.x-b.damageLimit && HeroX<=b.x+b.damageLimit && HeroY>=b.y-b.damageLimit && HeroY<=b.y+b.damageLimit){
+                    HeroX=checkPointX;
+                    HeroY=checkPointY;
+                    heartCounter++;
+                }
             }
         }
         bombs.removeAll(toRemove);
@@ -352,9 +409,11 @@ public class InsideStart implements Screen {
         else if(UpStand) game.batch.draw(new Texture("Stand_Up.png"),HeroX,HeroY);
         else if(DownStand) game.batch.draw(new Texture("Stand_Down.png"),HeroX,HeroY);
 
+        ArrayList<showHeart> removeHeart = new ArrayList<>();
         for(showHeart h : hearts){
+            if(h.index==heartCounter) removeHeart.add(h);
             h.render(game.batch);
-        }
+        }hearts.removeAll(removeHeart);
 
         ArrayList<showBomb> showBombRemove = new ArrayList<>();
         for(showBomb b : bombShow){
