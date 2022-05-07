@@ -21,6 +21,7 @@ import obstacles.*;
 import Enemies.*;
 import BombCounter.*;
 import HeartCounter.*;
+import KeysCollect.*;
 
 import java.util.ArrayList;
 
@@ -79,6 +80,17 @@ public class InsideStart implements Screen {
     ArrayList<showHeart> hearts = new ArrayList<>();
     int heartCounter=3;
 
+    //keys
+    ArrayList<showKeys> keys;
+    keysCoordinateChange keysLocationChange=new keysCoordinateChange();
+
+    //menuKeys
+    ArrayList<menuKeys> mKeys;
+    float mKeysCounter=0;
+    public float mKeysX;
+    public float mKeysY;
+    float mKeysDiff=30;
+
     //obstacle coordinate change
     obstacleCordinateChangeXneg negChange = new obstacleCordinateChangeXneg();
     obstacleCordinateChangeXpos posChange = new obstacleCordinateChangeXpos();
@@ -107,6 +119,13 @@ public class InsideStart implements Screen {
         //Vertical Enemies
         enemies2 = new VerticalEnemies().get();
 
+        //keys
+        keys = new ArrayList<>();
+        keys = new keysList().get();
+        mKeys = new ArrayList<>();
+        mKeysX=150;
+        mKeysY=-28;
+
         //Bombs show
         bombShow = new bombList().get();
 
@@ -127,6 +146,21 @@ public class InsideStart implements Screen {
         ScreenUtils.clear(0,1,1,1);
         game.batch.begin();
         game.batch.draw(gameMap,gameMapX,gameMapY,gameMapWidth,gameMapHight);
+
+        ArrayList<showKeys> removeKeys = new ArrayList<>();
+        for(showKeys k : keys){
+            k.update(0.2f,HeroX,HeroY);
+            if(k.remove){
+                removeKeys.add(k);
+                mKeys.add(new menuKeys(mKeysX+mKeysCounter*mKeysDiff,mKeysY));
+                mKeysCounter++;
+            }
+            k.render(game.batch);
+        }keys.removeAll(removeKeys);
+
+        for(menuKeys k : mKeys){
+            k.render(game.batch);
+        }
 
         for(Bomb b : bombs){
             b.render(game.batch);
@@ -206,6 +240,7 @@ public class InsideStart implements Screen {
                     bombPosChange.change(bombs);
                     enPosChange.change(enemies);
                     enPosChange.change2(enemies2);
+                    keysLocationChange.posChange(keys);
                     HeroLeftLimit-=4;
                 }
 
@@ -234,6 +269,7 @@ public class InsideStart implements Screen {
                     bombNegChange.change(bombs);
                     enNegChange.change(enemies);
                     enNegChange.change2(enemies2);
+                    keysLocationChange.negChange(keys);
                     HeroLeftLimit+=4;
                 }
             }

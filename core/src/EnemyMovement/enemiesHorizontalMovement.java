@@ -85,7 +85,6 @@ public class enemiesHorizontalMovement {
                 leftAttack=false;
                 upAttack=true;
                 downAttack=false;
-                System.out.println("Enemy attack :: "+enemyAttack);
             }
             else if(HeroY<posY && HeroY>=rangeY1){
                 movement=false;
