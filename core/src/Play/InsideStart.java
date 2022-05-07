@@ -43,6 +43,8 @@ public class InsideStart implements Screen {
 
     public float HeroX=70;
     public float HeroY=70;
+    public float checkPointX=70;
+    public float checkPointY=70;
 
     float playX1=30;
     float playX2=1140;
@@ -151,6 +153,8 @@ public class InsideStart implements Screen {
         for(showKeys k : keys){
             k.update(0.2f,HeroX,HeroY);
             if(k.remove){
+                checkPointX=k.x;
+                checkPointY=k.y;
                 removeKeys.add(k);
                 mKeys.add(new menuKeys(mKeysX+mKeysCounter*mKeysDiff,mKeysY));
                 mKeysCounter++;
@@ -172,8 +176,8 @@ public class InsideStart implements Screen {
             e.update(0.1f,HeroX,HeroY);
             if(e.remove) Removed.add(e);
             if(e.enemyAttack>=100){
-                HeroX=40;
-                HeroY=40;
+                HeroX=checkPointX;
+                HeroY=checkPointY;
                 e.enemyAttack=0;
             }
             e.render(game.batch);
@@ -185,8 +189,8 @@ public class InsideStart implements Screen {
             e.update(0.1f,HeroX,HeroY);
             if(e.remove) Removed2.add(e);
             if(e.enemyAttack>=100){
-                HeroX=40;
-                HeroY=40;
+                HeroX=checkPointX;
+                HeroY=checkPointY;
                 e.enemyAttack=0;
             }
             e.render(game.batch);
@@ -241,6 +245,7 @@ public class InsideStart implements Screen {
                     enPosChange.change(enemies);
                     enPosChange.change2(enemies2);
                     keysLocationChange.posChange(keys);
+                    checkPointX-=4;
                     HeroLeftLimit-=4;
                 }
 
@@ -270,6 +275,7 @@ public class InsideStart implements Screen {
                     enNegChange.change(enemies);
                     enNegChange.change2(enemies2);
                     keysLocationChange.negChange(keys);
+                    checkPointX+=4;
                     HeroLeftLimit+=4;
                 }
             }
