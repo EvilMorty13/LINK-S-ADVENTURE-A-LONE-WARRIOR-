@@ -94,6 +94,10 @@ public class InsideStart implements Screen {
     float mKeysDiff=30;
     int keyChose=0;
 
+    //princess
+    princess Princess;
+    float princessX=1066,princessY=270;
+
     //obstacle coordinate change
     obstacleCordinateChangeXneg negChange = new obstacleCordinateChangeXneg();
     obstacleCordinateChangeXpos posChange = new obstacleCordinateChangeXpos();
@@ -135,6 +139,9 @@ public class InsideStart implements Screen {
         //Heart show
         hearts = new heartList().get();
 
+        //princess
+        Princess = new princess(princessX,princessY);
+
     }
 
     @Override
@@ -149,6 +156,9 @@ public class InsideStart implements Screen {
         ScreenUtils.clear(0,1,1,1);
         game.batch.begin();
         game.batch.draw(gameMap,gameMapX,gameMapY,gameMapWidth,gameMapHight);
+
+        Princess.update(0.2f,princessX,princessY);
+        Princess.render(game.batch);
 
         ArrayList<showKeys> removeKeys = new ArrayList<>();
         for(showKeys k : keys){
@@ -304,6 +314,7 @@ public class InsideStart implements Screen {
                     keysLocationChange.posChange(keys);
                     checkPointX-=4;
                     HeroLeftLimit-=4;
+                    princessX-=4;
                 }
 
             }
@@ -334,6 +345,7 @@ public class InsideStart implements Screen {
                     keysLocationChange.negChange(keys);
                     checkPointX+=4;
                     HeroLeftLimit+=4;
+                    princessX+=4;
                 }
             }
             else HeroX-=4;
