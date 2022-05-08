@@ -12,6 +12,7 @@ public class SoundScreen implements Screen {
     MainGame game;
     Texture Sound_Screen;
     Texture SoundCircleImg;
+    Texture mute;
     private static final int SoundCircleWidth=22;
     private static final int SoundCircleHight=13;
 
@@ -31,6 +32,7 @@ public class SoundScreen implements Screen {
         SoundManager.create();
         Sound_Screen = new Texture("Sound_Screen.png");
         SoundCircleImg = new Texture("Circle.png");
+        mute = new Texture("Mute.png");
     }
 
     @Override
@@ -38,6 +40,7 @@ public class SoundScreen implements Screen {
         game.batch.begin();
         game.batch.draw(Sound_Screen,0f,0f);
         game.batch.draw(SoundCircleImg,SoundCircleX[SoundCircleIndx],SoundCircleY[SoundCircleIndx],SoundCircleWidth,SoundCircleHight);
+
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
             SoundManager.MenuMoving.stop();

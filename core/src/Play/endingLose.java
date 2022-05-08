@@ -1,6 +1,7 @@
 package Play;
 
 import Menu.MenuScreen;
+import Sound.SoundManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MainGame;
+import Sound.*;
 
 public class endingLose implements Screen {
     MainGame game;
@@ -42,6 +44,7 @@ public class endingLose implements Screen {
     public void show() {
         loseImg = new Texture("Lose.png");
         circleImg = new Texture("Circle.png");
+        SoundManager.create();
     }
 
     @Override
@@ -53,15 +56,20 @@ public class endingLose implements Screen {
         game.batch.draw(circleImg,circleX[circleIndex],circleY[circleIndex],circleWidth,circleHight);
         game.batch.draw((TextureRegion) dialogue.getKeyFrame(time,false),50f,540f);
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+            SoundManager.MenuMoving.stop();
+            SoundManager.MenuMoving.play();
             circleIndex--;
             if(circleIndex<0) circleIndex=1;
         }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
+            SoundManager.MenuMoving.stop();
+            SoundManager.MenuMoving.play();
             circleIndex++;
             if(circleIndex>1) circleIndex=0;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
             this.dispose();
+            SoundManager.MenuSelection.play();
             if(circleIndex==0) game.setScreen(new InsideStart(game,soundState));
             else game.setScreen(new MenuScreen(game,soundState));
         }
@@ -90,6 +98,6 @@ public class endingLose implements Screen {
 
     @Override
     public void dispose() {
-
+          SoundManager.dispose();
     }
 }

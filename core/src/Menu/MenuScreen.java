@@ -18,6 +18,7 @@ public class MenuScreen implements Screen {
 
     Texture mainMenuImg;
     Texture circleImg;
+    Texture mute;
 
     private static final int circleWidth=22;
     private static final int circleHight=13;
@@ -47,6 +48,7 @@ public class MenuScreen implements Screen {
 
         mainMenuImg=new Texture("Menu2.png");
         circleImg = new Texture("Circle.png");
+        mute = new Texture("Mute.png");
     }
 
     @Override
@@ -57,6 +59,7 @@ public class MenuScreen implements Screen {
         game.batch.begin();
         game.batch.draw(mainMenuImg,0,0);
         game.batch.draw(circleImg,circleX[circleIndx],circleY[circleIndx],circleWidth,circleHight);
+        if(!soundState){game.batch.draw(mute,1240,680,30,30);}
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
             SoundManager.MenuMoving.stop();

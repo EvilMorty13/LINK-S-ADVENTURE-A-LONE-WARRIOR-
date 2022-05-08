@@ -30,6 +30,7 @@ public class InsideStart implements Screen {
     MainGame game;
     Texture gameMap;
     Texture gameMap2;
+    Texture mute;
 
     float gameMapX=0;
     float gameMapY=0;
@@ -160,6 +161,7 @@ public class InsideStart implements Screen {
     public void show() {
         gameMap=new Texture("NewMap.png");
         gameMap2=new Texture("NewMap2.png");
+        mute = new Texture("Mute.png");
     }
 
     @Override
@@ -506,6 +508,8 @@ public class InsideStart implements Screen {
             if(b.index==bombCounter+1) showBombRemove.add(b);
             b.render(game.batch);
         }bombShow.removeAll(showBombRemove);
+
+        if(!soundState){game.batch.draw(mute,1130,2,30,30);}
 
         game.batch.end();
     }

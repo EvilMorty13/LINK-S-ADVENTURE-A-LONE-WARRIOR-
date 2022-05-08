@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MainGame;
+import Sound.*;
 
 public class endingWin implements Screen {
     MainGame game;
@@ -49,6 +50,7 @@ public class endingWin implements Screen {
     public void show() {
         backgroundImg=new Texture("Win.png");
         circleImg = new Texture("Circle.png");
+        SoundManager.create();
     }
 
 
@@ -67,15 +69,20 @@ public class endingWin implements Screen {
             endWin2.render(game.batch);
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+            SoundManager.MenuMoving.stop();
+            SoundManager.MenuMoving.play();
             circleIndex--;
             if(circleIndex<0) circleIndex=1;
         }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
+            SoundManager.MenuMoving.stop();
+            SoundManager.MenuMoving.play();
             circleIndex++;
             if(circleIndex>1) circleIndex=0;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
             this.dispose();
+            SoundManager.MenuSelection.play();
             if(circleIndex==0) game.setScreen(new InsideStart(game,soundState));
             else game.setScreen(new MenuScreen(game,soundState));
         }
@@ -104,6 +111,6 @@ public class endingWin implements Screen {
 
     @Override
     public void dispose() {
-
+        SoundManager.dispose();
     }
 }
