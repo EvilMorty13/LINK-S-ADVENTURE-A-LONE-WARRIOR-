@@ -343,6 +343,7 @@ public class InsideStart implements Screen {
                             HeroLeftLimit+=4;
                             princessX+=4;
                             gameMapX+=4;
+                            fogList.negativeChange();
                         }
                     }
                     else if(keyChose==3){
@@ -356,6 +357,7 @@ public class InsideStart implements Screen {
                             HeroLeftLimit-=4;
                             princessX-=4;
                             gameMapX-=4;
+                            fogList.positiveChange();
                         }
                     }
                     HeroX=checkPointX;
