@@ -27,4 +27,5 @@ public class obstaclesCollection {
     public obstacle24 obs24=new obstacle24();
     public obstacle25 obs25=new obstacle25();
     public obstacle26 obs26=new obstacle26();
+    public obstacleHome obsHome=new obstacleHome();
 }

@@ -2,7 +2,7 @@ package obstacleCordinateChange;
 import ObstacleDetection.*;
 public class obstacleCordinateChangeXneg {
 
-    public void change(obstacle3 obs3,obstacle4 obs4,obstacle5 obs5,obstacle6 obs6,obstacle7 obs7,obstacle8 obs8,obstacle9 obs9,obstacle10 obs10,obstacle11 obs11,obstacle12 obs12,obstacle14 obs14,obstacle15 obs15,obstacle16 obs16,obstacle17 obs17,obstacle17_bridge obs17_bridge,obstacle18 obs18,obstacle19 obs19,obstacle20 obs20,obstacle21 obs21,obstacle22 obs22,obstacle23 obs23,obstacle24 obs24,obstacle25 obs25,obstacle26 obs26){
+    public void change(obstacle3 obs3,obstacle4 obs4,obstacle5 obs5,obstacle6 obs6,obstacle7 obs7,obstacle8 obs8,obstacle9 obs9,obstacle10 obs10,obstacle11 obs11,obstacle12 obs12,obstacle14 obs14,obstacle15 obs15,obstacle16 obs16,obstacle17 obs17,obstacle17_bridge obs17_bridge,obstacle18 obs18,obstacle19 obs19,obstacle20 obs20,obstacle21 obs21,obstacle22 obs22,obstacle23 obs23,obstacle24 obs24,obstacle25 obs25,obstacle26 obs26,obstacleHome obsHome){
         obs3.limitX-=4;
         obs4.limitX1-=4;
         obs4.limitX2-=4;
@@ -49,5 +49,7 @@ public class obstacleCordinateChangeXneg {
         obs25.limitX-=4;
         obs26.limitX1-=4;
         obs26.limitX2-=4;
+        obsHome.limitX1-=4;
+        obsHome.limitX2-=4;
     }
 }

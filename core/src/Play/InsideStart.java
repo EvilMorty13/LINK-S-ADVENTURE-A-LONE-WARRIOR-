@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MainGame;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 public class InsideStart implements Screen {
     MainGame game;
     Texture gameMap;
+    Texture gameMap2;
 
     float gameMapX=0;
     float gameMapY=0;
@@ -45,6 +47,7 @@ public class InsideStart implements Screen {
     public float HeroY=70;
     public float checkPointX=70;
     public float checkPointY=70;
+    boolean allClear=false;
 
     float playX1=30;
     float playX2=1140;
@@ -98,6 +101,10 @@ public class InsideStart implements Screen {
     princess Princess;
     float princessX=1066,princessY=270;
 
+    //fog
+    ArrayList<smoke> fog;
+    smokeList fogList;
+
     //obstacle coordinate change
     obstacleCordinateChangeXneg negChange = new obstacleCordinateChangeXneg();
     obstacleCordinateChangeXpos posChange = new obstacleCordinateChangeXpos();
@@ -142,11 +149,17 @@ public class InsideStart implements Screen {
         //princess
         Princess = new princess(princessX,princessY);
 
+        //smoke
+        fog = new ArrayList<>();
+        fogList=new smokeList();
+        fog = fogList.get();
+
     }
 
     @Override
     public void show() {
-        gameMap=new Texture("FM.png");
+        gameMap=new Texture("NewMap.png");
+        gameMap2=new Texture("NewMap2.png");
     }
 
     @Override
@@ -155,7 +168,27 @@ public class InsideStart implements Screen {
         time+=delta;
         ScreenUtils.clear(0,1,1,1);
         game.batch.begin();
-        game.batch.draw(gameMap,gameMapX,gameMapY,gameMapWidth,gameMapHight);
+
+        //game ending
+        if(HeroX>=princessX-50 && HeroX<=princessX+50 && HeroY>=princessY-50 && HeroY<=princessY+50){
+            this.dispose();
+            game.setScreen(new endingWin(game));
+        }
+
+
+        if(keys.size()==0 && enemies.size()==0 && enemies2.size()==0){
+            game.batch.draw(gameMap2,gameMapX,gameMapY,gameMapWidth,gameMapHight);
+            allClear=true;
+            for(smoke s : fog){
+                if(!s.done){
+                    s.update(0.1f);
+                    s.render(game.batch);
+                }
+            }
+        }
+        else game.batch.draw(gameMap,gameMapX,gameMapY,gameMapWidth,gameMapHight);
+//        fog.update(0.1f,fog.x, fog.y);
+//        fog.render(game.batch);
 
         Princess.update(0.2f,princessX,princessY);
         Princess.render(game.batch);
@@ -173,6 +206,7 @@ public class InsideStart implements Screen {
             }
             k.render(game.batch);
         }keys.removeAll(removeKeys);
+        //System.out.println("keys :: "+keys.size());
 
         for(menuKeys k : mKeys){
             k.render(game.batch);
@@ -192,7 +226,7 @@ public class InsideStart implements Screen {
                 e.enemyAttack=0;
                 if(keyChose<3){
                     while(gameMapX<MapLimitX1-50){
-                        posChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26);
+                        posChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26, obs.obsHome);
                         bombNegChange.change(bombs);
                         enNegChange.change(enemies);
                         enNegChange.change2(enemies2);
@@ -201,11 +235,12 @@ public class InsideStart implements Screen {
                         HeroLeftLimit+=4;
                         gameMapX+=4;
                         princessX+=4;
+                        fogList.negativeChange();
                     }
                 }
                 else if(keyChose==3){
                     while(gameMapX>MapLimitX2+100){
-                        negChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26);
+                        negChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26, obs.obsHome);
                         bombPosChange.change(bombs);
                         enPosChange.change(enemies);
                         enPosChange.change2(enemies2);
@@ -214,6 +249,7 @@ public class InsideStart implements Screen {
                         HeroLeftLimit-=4;
                         princessX-=4;
                         gameMapX-=4;
+                        fogList.positiveChange();
                     }
                 }
                 HeroX=checkPointX;
@@ -232,7 +268,7 @@ public class InsideStart implements Screen {
                 e.enemyAttack=0;
                 if(keyChose<3){
                     while(gameMapX<MapLimitX1-50){
-                        posChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26);
+                        posChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26,obs.obsHome);
                         bombNegChange.change(bombs);
                         enNegChange.change(enemies);
                         enNegChange.change2(enemies2);
@@ -241,11 +277,12 @@ public class InsideStart implements Screen {
                         HeroLeftLimit+=4;
                         princessX+=4;
                         gameMapX+=4;
+                        fogList.negativeChange();
                     }
                 }
                 else if(keyChose==3){
                     while(gameMapX>MapLimitX2+100){
-                        negChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26);
+                        negChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26, obs.obsHome);
                         bombPosChange.change(bombs);
                         enPosChange.change(enemies);
                         enPosChange.change2(enemies2);
@@ -253,6 +290,7 @@ public class InsideStart implements Screen {
                         checkPointX-=4;
                         HeroLeftLimit-=4;
                         princessX-=4;
+                        fogList.positiveChange();
                         gameMapX-=4;
                     }
                 }
@@ -288,6 +326,32 @@ public class InsideStart implements Screen {
                 enemies.removeAll(Removed);
                 enemies2.removeAll(Removed2);
                 if(HeroX>=b.x-b.damageLimit && HeroX<=b.x+b.damageLimit && HeroY>=b.y-b.damageLimit && HeroY<=b.y+b.damageLimit){
+                    if(keyChose<3){
+                        while(gameMapX<MapLimitX1-50){
+                            posChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26, obs.obsHome);
+                            bombNegChange.change(bombs);
+                            enNegChange.change(enemies);
+                            enNegChange.change2(enemies2);
+                            keysLocationChange.negChange(keys);
+                            checkPointX+=4;
+                            HeroLeftLimit+=4;
+                            princessX+=4;
+                            gameMapX+=4;
+                        }
+                    }
+                    else if(keyChose==3){
+                        while(gameMapX>MapLimitX2+100){
+                            negChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26, obs.obsHome);
+                            bombPosChange.change(bombs);
+                            enPosChange.change(enemies);
+                            enPosChange.change2(enemies2);
+                            keysLocationChange.posChange(keys);
+                            checkPointX-=4;
+                            HeroLeftLimit-=4;
+                            princessX-=4;
+                            gameMapX-=4;
+                        }
+                    }
                     HeroX=checkPointX;
                     HeroY=checkPointY;
                     heartCounter++;
@@ -311,20 +375,21 @@ public class InsideStart implements Screen {
                     HeroX+=4;
                 }
                 else{
-                    negChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26);
+                    negChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26, obs.obsHome);
                     bombPosChange.change(bombs);
                     enPosChange.change(enemies);
                     enPosChange.change2(enemies2);
                     keysLocationChange.posChange(keys);
                     checkPointX-=4;
                     HeroLeftLimit-=4;
+                    fogList.positiveChange();
                     princessX-=4;
                 }
 
             }
             else HeroX+=4;
             if(HeroX>HeroRightLimit) HeroX=HeroRightLimit;
-            else HeroX = rightCheck.check(HeroX, HeroY, obs.obs5, obs.obs6, obs.obs7, obs.obs8, obs.obs9, obs.obs10, obs.obs11, obs.obs12, obs.obs14, obs.obs15, obs.obs16, obs.obs17, obs.obs17_bridge, obs.obs18, obs.obs19, obs.obs20, obs.obs21, obs.obs22, obs.obs23, obs.obs24, obs.obs25, obs.obs26);
+            else HeroX = rightCheck.check(HeroX, HeroY, obs.obs5, obs.obs6, obs.obs7, obs.obs8, obs.obs9, obs.obs10, obs.obs11, obs.obs12, obs.obs14, obs.obs15, obs.obs16, obs.obs17, obs.obs17_bridge, obs.obs18, obs.obs19, obs.obs20, obs.obs21, obs.obs22, obs.obs23, obs.obs24, obs.obs25, obs.obs26, obs.obsHome, allClear);
 
             game.batch.draw((TextureRegion) link.RightMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
@@ -342,19 +407,20 @@ public class InsideStart implements Screen {
                     HeroX-=4;
                 }
                 else{
-                    posChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26);
+                    posChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26,obs.obsHome);
                     bombNegChange.change(bombs);
                     enNegChange.change(enemies);
                     enNegChange.change2(enemies2);
                     keysLocationChange.negChange(keys);
                     checkPointX+=4;
                     HeroLeftLimit+=4;
+                    fogList.negativeChange();
                     princessX+=4;
                 }
             }
             else HeroX-=4;
             if(HeroX< HeroLeftLimit) HeroX=HeroLeftLimit;
-            else HeroX = leftCheck.check(HeroX,HeroY,obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs26);
+            else HeroX = leftCheck.check(HeroX,HeroY,obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs26,obs.obsHome,allClear);
 
             game.batch.draw((TextureRegion) link.LeftMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
@@ -366,7 +432,7 @@ public class InsideStart implements Screen {
             UpStand=true;
             DownStand=false;
             HeroY+=4;
-            HeroY=upCheck.check(HeroX,HeroY,obs.obs2,obs.obs3,obs.obs4,obs.obs5,obs.obs7,obs.obs8,obs.obs9,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26);
+            HeroY=upCheck.check(HeroX,HeroY,obs.obs2,obs.obs3,obs.obs4,obs.obs5,obs.obs7,obs.obs8,obs.obs9,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26,obs.obsHome,allClear);
             game.batch.draw((TextureRegion) link.UpMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
@@ -377,7 +443,7 @@ public class InsideStart implements Screen {
             UpStand=false;
             DownStand=true;
             HeroY-=4;
-            HeroY = downCheck.check(HeroX,HeroY,obs.obs1,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26);
+            HeroY = downCheck.check(HeroX,HeroY,obs.obs1,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26, obs.obsHome);
             game.batch.draw((TextureRegion) link.DownMovement.getKeyFrame(time,true),HeroX,HeroY);
         }
 
