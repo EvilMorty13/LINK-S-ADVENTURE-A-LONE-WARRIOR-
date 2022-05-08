@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class endingWin2 {
     float showTime;
     Animation dialogue2;
-    float x=600,y=300;
+    float x=800,y=-15;
     public endingWin2(){
         TextureRegion[][] tempDialogue2 = TextureRegion.split(new Texture("continue.png"),500,100);
         TextureRegion[] dialogueArray2 = new TextureRegion[15];

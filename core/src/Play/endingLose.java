@@ -10,62 +10,48 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MainGame;
 
-public class endingWin implements Screen {
+public class endingLose implements Screen {
     MainGame game;
-    Texture backgroundImg;
-    float time;
-    Animation dialogue1;
-    boolean done=false;
-    boolean done2=false;
-    float time2;
-    endingWin2 endWin2;
     boolean soundState;
+    Texture loseImg;
+    Animation dialogue;
+    float time;
 
     Texture circleImg;
 
     private static final int circleWidth=22;
     private static final int circleHight=13;
 
-    final int[] circleX = new int[]{1087,1085};
-    final int[] circleY = new int[]{377,328};
+    final int[] circleX = new int[]{1105,1085};
+    final int[] circleY = new int[]{375,328};
 
     int circleIndex=0;
 
-    public endingWin(MainGame game,boolean soundState){
-        this.soundState=soundState;
+    public endingLose(MainGame game,boolean soundState){
         this.game=game;
-        TextureRegion[][] tempDialogue1 = TextureRegion.split(new Texture("Ending.png"),500,100);
-
-        TextureRegion[] dialogueArray = new TextureRegion[18];
-
+        this.soundState=soundState;
+        TextureRegion[][] tempLuck = TextureRegion.split(new Texture("Luck.png"),500,100);
+        TextureRegion[] luckArray = new TextureRegion[18];
         for(int i=0;i<18;i++){
-            dialogueArray[i]=tempDialogue1[i][0];
+            luckArray[i]=tempLuck[i][0];
         }
-        dialogue1=new Animation(0.2f,dialogueArray);
-
-        endWin2=new endingWin2();
+        dialogue = new Animation(0.2f,luckArray);
     }
+
     @Override
     public void show() {
-        backgroundImg=new Texture("Win.png");
+        loseImg = new Texture("Lose.png");
         circleImg = new Texture("Circle.png");
     }
-
 
     @Override
     public void render(float delta) {
         time+=delta;
-        time2+=0.5f;
         game.batch.begin();
         ScreenUtils.clear(0,0,0,0);
-        game.batch.draw(backgroundImg,0,0);
+        game.batch.draw(loseImg,0,0);
         game.batch.draw(circleImg,circleX[circleIndex],circleY[circleIndex],circleWidth,circleHight);
-        if(dialogue1.isAnimationFinished(time)) done=true;
-        game.batch.draw((TextureRegion) dialogue1.getKeyFrame(time,false),600f,40f);
-        if(done){
-            endWin2.update(0.2f);
-            endWin2.render(game.batch);
-        }
+        game.batch.draw((TextureRegion) dialogue.getKeyFrame(time,false),50f,540f);
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             circleIndex--;
             if(circleIndex<0) circleIndex=1;

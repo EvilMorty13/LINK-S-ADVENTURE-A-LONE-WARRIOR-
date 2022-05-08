@@ -22,9 +22,6 @@ public class MenuScreen implements Screen {
     private static final int circleWidth=22;
     private static final int circleHight=13;
 
-
-    int count=0;
-
     final int[] circleX = new int[]{1160,1144,1068,1132,1176};
     final int[] circleY = new int[]{320,272,224,176,130};
 
