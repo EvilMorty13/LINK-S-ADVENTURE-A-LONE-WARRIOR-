@@ -10,7 +10,7 @@ public class endingWin2 {
     Animation dialogue2;
     float x=800,y=-15;
     public endingWin2(){
-        TextureRegion[][] tempDialogue2 = TextureRegion.split(new Texture("continue.png"),500,100);
+        TextureRegion[][] tempDialogue2 = TextureRegion.split(new Texture("Text/Continue.png"),500,100);
         TextureRegion[] dialogueArray2 = new TextureRegion[15];
         for(int i=0;i<15;i++){
             dialogueArray2[i]=tempDialogue2[i][0];

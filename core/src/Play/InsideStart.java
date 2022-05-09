@@ -32,6 +32,12 @@ public class InsideStart implements Screen {
     Texture gameMap2;
     Texture mute;
 
+
+    Texture StandRight;
+    Texture StandLeft;
+    Texture StandUp;
+    Texture StandDown;
+
     float gameMapX=0;
     float gameMapY=0;
     float gameMapWidth=2000;
@@ -159,9 +165,13 @@ public class InsideStart implements Screen {
 
     @Override
     public void show() {
-        gameMap=new Texture("NewMap.png");
-        gameMap2=new Texture("NewMap2.png");
-        mute = new Texture("Mute.png");
+        gameMap=new Texture("Map/Map.png");
+        gameMap2=new Texture("Map/Map_2.png");
+        mute = new Texture("Others/Mute.png");
+        StandRight = new Texture("Stand/Stand_Right.png");
+        StandLeft = new Texture("Stand/Stand_Left.png");
+        StandUp = new Texture("Stand/Stand_Up.png");
+        StandDown = new Texture("Stand/Stand_Down.png");
     }
 
     @Override
@@ -203,6 +213,8 @@ public class InsideStart implements Screen {
         for(showKeys k : keys){
             k.update(0.2f,HeroX,HeroY);
             if(k.remove){
+                SoundManager.KeyFoundSound.stop();
+                SoundManager.KeyFoundSound.play();
                 checkPointX=k.x;
                 checkPointY=k.y;
                 removeKeys.add(k);
@@ -314,6 +326,8 @@ public class InsideStart implements Screen {
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.D)){
+            SoundManager.BombDrop.stop();
+            SoundManager.BombDrop.play();
             if(bombCounter>0) bombs.add(new Bomb(HeroX,HeroY));
             bombCounter--;
         }
@@ -456,6 +470,7 @@ public class InsideStart implements Screen {
         }
 
         else if(Gdx.input.isKeyPressed(Input.Keys.A)){ // sword animation
+            SoundManager.SwordSlash.play();
             if(RightStand) {
                 for(enemiesHorizontalMovement e : enemies){
                     if(e.attack && e.leftAttack && link.RightSwordMovement.isAnimationFinished(time)) e.linkAttack++;
@@ -494,10 +509,10 @@ public class InsideStart implements Screen {
             }
         }
 
-        else if(RightStand) game.batch.draw(new Texture("Stand_Right.png"),HeroX,HeroY);
-        else if(LeftStand) game.batch.draw(new Texture("Stand_Left.png"),HeroX,HeroY);
-        else if(UpStand) game.batch.draw(new Texture("Stand_Up.png"),HeroX,HeroY);
-        else if(DownStand) game.batch.draw(new Texture("Stand_Down.png"),HeroX,HeroY);
+        else if(RightStand) game.batch.draw(StandRight,HeroX,HeroY);
+        else if(LeftStand) game.batch.draw(StandLeft,HeroX,HeroY);
+        else if(UpStand) game.batch.draw(StandUp,HeroX,HeroY);
+        else if(DownStand) game.batch.draw(StandDown,HeroX,HeroY);
 
         ArrayList<showHeart> removeHeart = new ArrayList<>();
         for(showHeart h : hearts){

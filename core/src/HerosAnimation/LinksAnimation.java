@@ -18,17 +18,17 @@ public class LinksAnimation {
     public LinksAnimation(){
         //Character Movement Animation
 
-        TextureRegion[][] tempRight = TextureRegion.split(new Texture("Movement_Right.png"),100,100);
-        TextureRegion[][] tempLeft = TextureRegion.split(new Texture("Movement_Left.png"),100,100);
-        TextureRegion[][] tempDown = TextureRegion.split(new Texture("Movement_Down.png"),100,100);
-        TextureRegion[][] tempUp = TextureRegion.split(new Texture("Movement_Up.png"),100,100);
+        TextureRegion[][] tempRight = TextureRegion.split(new Texture("Movement/Movement_Right.png"),100,100);
+        TextureRegion[][] tempLeft = TextureRegion.split(new Texture("Movement/Movement_Left.png"),100,100);
+        TextureRegion[][] tempDown = TextureRegion.split(new Texture("Movement/Movement_Down.png"),100,100);
+        TextureRegion[][] tempUp = TextureRegion.split(new Texture("Movement/Movement_Up.png"),100,100);
 
         //Character Sword Animation
 
-        TextureRegion[][] tempRightSword = TextureRegion.split(new Texture("Right_Sword.png"),100,100);
-        TextureRegion[][] tempLeftSword = TextureRegion.split(new Texture("Left_Sword.png"),100,100);
-        TextureRegion[][] tempUpSword = TextureRegion.split(new Texture("Up_Sword.png"),100,100);
-        TextureRegion[][] tempDownSword = TextureRegion.split(new Texture("Down_Sword.png"),100,100);
+        TextureRegion[][] tempRightSword = TextureRegion.split(new Texture("Sword/Right_Sword.png"),100,100);
+        TextureRegion[][] tempLeftSword = TextureRegion.split(new Texture("Sword/Left_Sword.png"),100,100);
+        TextureRegion[][] tempUpSword = TextureRegion.split(new Texture("Sword/Up_Sword.png"),100,100);
+        TextureRegion[][] tempDownSword = TextureRegion.split(new Texture("Sword/Down_Sword.png"),100,100);
 
 
 

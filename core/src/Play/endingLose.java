@@ -32,7 +32,7 @@ public class endingLose implements Screen {
     public endingLose(MainGame game,boolean soundState){
         this.game=game;
         this.soundState=soundState;
-        TextureRegion[][] tempLuck = TextureRegion.split(new Texture("Luck.png"),500,100);
+        TextureRegion[][] tempLuck = TextureRegion.split(new Texture("Text/Luck.png"),500,100);
         TextureRegion[] luckArray = new TextureRegion[18];
         for(int i=0;i<18;i++){
             luckArray[i]=tempLuck[i][0];
@@ -42,8 +42,8 @@ public class endingLose implements Screen {
 
     @Override
     public void show() {
-        loseImg = new Texture("Lose.png");
-        circleImg = new Texture("Circle.png");
+        loseImg = new Texture("Menu/Lose.png");
+        circleImg = new Texture("Others/Circle.png");
         SoundManager.create();
     }
 

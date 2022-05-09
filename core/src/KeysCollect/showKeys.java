@@ -15,7 +15,7 @@ public class showKeys {
         this.index=index;
         this.x=x;
         this.y=y;
-        TextureRegion[][] tempKeys = TextureRegion.split(new Texture("Key.png"),100,100);
+        TextureRegion[][] tempKeys = TextureRegion.split(new Texture("Key/Key.png"),100,100);
         TextureRegion[] keysArrays = new TextureRegion[10];
         int indx=0;
         for(int i=0;i<5;i++){

@@ -48,9 +48,9 @@ public class MenuScreen implements Screen {
         SoundManager.Background.setVolume(0.2f);
         if(soundState) SoundManager.Background.play();
 
-        mainMenuImg=new Texture("Menu2.png");
-        circleImg = new Texture("Circle.png");
-        mute = new Texture("Mute.png");
+        mainMenuImg=new Texture("Menu/Main_Menu.png");
+        circleImg = new Texture("Others/Circle.png");
+        mute = new Texture("Others/Mute.png");
     }
 
     @Override

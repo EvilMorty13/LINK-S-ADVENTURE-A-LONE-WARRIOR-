@@ -9,7 +9,7 @@ public class menuKeys {
     public menuKeys(float x,float y){
         this.x=x;
         this.y=y;
-        img = new Texture("Key_1.png");
+        img = new Texture("Icon/Key_Icon.png");
     }
     public void render(SpriteBatch batch){
         batch.draw(img,x,y);

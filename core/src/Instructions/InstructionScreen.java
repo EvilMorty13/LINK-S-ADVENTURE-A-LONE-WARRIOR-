@@ -21,7 +21,7 @@ public class InstructionScreen implements Screen {
     @Override
     public void show() {
         SoundManager.create();
-        Instructions = new Texture("Instructions.png");
+        Instructions = new Texture("Menu/Instructions.png");
 
     }
 

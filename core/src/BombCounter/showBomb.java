@@ -11,7 +11,7 @@ public class showBomb {
         this.index=index;
         this.x=x;
         this.y=y;
-        bombImg = new Texture("Bomb_3.png");
+        bombImg = new Texture("Icon/Bomb_Icon.png");
     }
     public void render(SpriteBatch batch){
         batch.draw(bombImg,x,y);

@@ -26,11 +26,11 @@ public class StoryManager implements Screen {
     @Override
     public void show() {
         SoundManager.create();
-        st[0] = new Texture("Story_1.png");
-        st[1] = new Texture("Story_2.png");
-        st[2] = new Texture("Story_3.png");
-        st[3] = new Texture("Story_4.png");
-        st[4] = new Texture("Story_5.png");
+        st[0] = new Texture("Story/Story_1.png");
+        st[1] = new Texture("Story/Story_2.png");
+        st[2] = new Texture("Story/Story_3.png");
+        st[3] = new Texture("Story/Story_4.png");
+        st[4] = new Texture("Story/Story_5.png");
     }
 
     @Override

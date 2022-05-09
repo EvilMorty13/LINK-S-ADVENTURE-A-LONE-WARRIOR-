@@ -11,7 +11,7 @@ public class showHeart {
         this.index=index;
         this.x=x;
         this.y=y;
-        heartImg=new Texture("Heart.png");
+        heartImg=new Texture("Icon/Heart_Icon.png");
     }
     public void render(SpriteBatch batch){
         batch.draw(heartImg,x,y,30,30);

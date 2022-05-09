@@ -30,9 +30,9 @@ public class SoundScreen implements Screen {
     @Override
     public void show() {
         SoundManager.create();
-        Sound_Screen = new Texture("Sound_Screen.png");
-        SoundCircleImg = new Texture("Circle.png");
-        mute = new Texture("Mute.png");
+        Sound_Screen = new Texture("Menu/Sound_Screen.png");
+        SoundCircleImg = new Texture("Others/Circle.png");
+        mute = new Texture("Others/Mute.png");
     }
 
     @Override

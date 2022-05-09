@@ -35,12 +35,12 @@ public class enemiesHorizontalMovement {
         this.posY=posY;
         this.limX1=limX1;
         this.limX2=limX2;
-        TextureRegion[][] tempLeftToRight = TextureRegion.split(new Texture("Enemy_Movement_Right.png"),100,100);
-        TextureRegion[][] tempRightToLeft = TextureRegion.split(new Texture("Enemy_Movement_Left.png"),100,100);
-        TextureRegion[][] tempRightSword = TextureRegion.split(new Texture("Enemy_Sword_Right.png"),100,100);
-        TextureRegion[][] tempLeftSword = TextureRegion.split(new Texture("Enemy_Sword_Left.png"),100,100);
-        TextureRegion[][] tempDownSword = TextureRegion.split(new Texture("Enemy_Sword_Down.png"),100,100);
-        TextureRegion[][] tempUpSword = TextureRegion.split(new Texture("Enemy_Sword_Up.png"),100,100);
+        TextureRegion[][] tempLeftToRight = TextureRegion.split(new Texture("Enemy_Movement/Enemy_Movement_Right.png"),100,100);
+        TextureRegion[][] tempRightToLeft = TextureRegion.split(new Texture("Enemy_Movement/Enemy_Movement_Left.png"),100,100);
+        TextureRegion[][] tempRightSword = TextureRegion.split(new Texture("Enemy_Sword/Enemy_Sword_Right.png"),100,100);
+        TextureRegion[][] tempLeftSword = TextureRegion.split(new Texture("Enemy_Sword/Enemy_Sword_Left.png"),100,100);
+        TextureRegion[][] tempDownSword = TextureRegion.split(new Texture("Enemy_Sword/Enemy_Sword_Down.png"),100,100);
+        TextureRegion[][] tempUpSword = TextureRegion.split(new Texture("Enemy_Sword/Enemy_Sword_Up.png"),100,100);
 
         TextureRegion[] LeftToRightArray = new TextureRegion[4];
         TextureRegion[] RightToLeftArray = new TextureRegion[4];

@@ -35,7 +35,7 @@ public class endingWin implements Screen {
     public endingWin(MainGame game,boolean soundState){
         this.soundState=soundState;
         this.game=game;
-        TextureRegion[][] tempDialogue1 = TextureRegion.split(new Texture("Ending.png"),500,100);
+        TextureRegion[][] tempDialogue1 = TextureRegion.split(new Texture("Text/Ending.png"),500,100);
 
         TextureRegion[] dialogueArray = new TextureRegion[18];
 
@@ -48,8 +48,8 @@ public class endingWin implements Screen {
     }
     @Override
     public void show() {
-        backgroundImg=new Texture("Win.png");
-        circleImg = new Texture("Circle.png");
+        backgroundImg=new Texture("Menu/Win.png");
+        circleImg = new Texture("Others/Circle.png");
         SoundManager.create();
     }
 

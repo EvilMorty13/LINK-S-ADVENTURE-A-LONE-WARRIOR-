@@ -1,9 +1,11 @@
 package BombAnimation;
 
+import Sound.SoundManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import Sound.*;
 
 public class Bomb {
     public float x;
@@ -15,7 +17,7 @@ public class Bomb {
     public Bomb(float x,float y){
         this.x=x;
         this.y=y;
-        TextureRegion[][] tempBomb = TextureRegion.split(new Texture("Bomb.png"),100,100);
+        TextureRegion[][] tempBomb = TextureRegion.split(new Texture("Bomb/Bomb.png"),100,100);
         TextureRegion[] tempArr = new TextureRegion[4];
         int indx=0;
         for(int i=0;i<2;i++){
@@ -27,7 +29,11 @@ public class Bomb {
     }
     public void update(float time){
         blastTime+=time;
-        if(bomb.isAnimationFinished(blastTime)) remove=true;
+        if(bomb.isAnimationFinished(blastTime)){
+            SoundManager.BombBlow.play();
+            SoundManager.dispose();
+            remove=true;
+        }
     }
     public void render(SpriteBatch batch){
         batch.draw((TextureRegion) bomb.getKeyFrame(blastTime,true),x,y);

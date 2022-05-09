@@ -12,7 +12,7 @@ public class princess {
     public princess(float princessX,float princessY){
         this.princessX=princessX;
         this.princessY=princessY;
-        TextureRegion[][] tempCry = TextureRegion.split(new Texture("Princess_Crying.png"),100,100);
+        TextureRegion[][] tempCry = TextureRegion.split(new Texture("Princess/Princess_Crying.png"),100,100);
         TextureRegion[] cryArray = new TextureRegion[6];
         int index=0;
         for(int i=0;i<3;i++){

@@ -1,10 +1,11 @@
 package Play;
 
+import Sound.SoundManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
+import Sound.*;
 public class smoke {
     Animation smokeAnimation;
     float smokeTime;
@@ -13,7 +14,7 @@ public class smoke {
     public smoke(float x,float y){
         this.x=x;
         this.y=y;
-        TextureRegion[][] tempSmoke = TextureRegion.split(new Texture("Smoke.png"),100,100);
+        TextureRegion[][] tempSmoke = TextureRegion.split(new Texture("Smoke/Smoke.png"),100,100);
         TextureRegion[] smokeArray = new TextureRegion[6];
         int index=0;
         for(int i=0;i<3;i++){

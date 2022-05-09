@@ -21,7 +21,7 @@ public class CreditsScreen implements Screen {
     @Override
     public void show() {
         SoundManager.create();
-        Credits = new Texture("Credits.png");
+        Credits = new Texture("Menu/Credits.png");
     }
 
     @Override
