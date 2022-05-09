@@ -1,5 +1,6 @@
 package Menu;
 
+import Story.StoryManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -11,6 +12,7 @@ import Play.InsideStart;
 import Instructions.InstructionScreen;
 import com.mygdx.game.MainGame;
 import Sound.*;
+import Story.*;
 
 public class MenuScreen implements Screen {
 
@@ -78,7 +80,7 @@ public class MenuScreen implements Screen {
         if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
             this.dispose();
             SoundManager.MenuSelection.play();
-            if(circleIndx==0) game.setScreen(new InsideStart(game,soundState));
+            if(circleIndx==0) game.setScreen(new StoryManager(game,soundState));
             else if(circleIndx==1) game.setScreen(new SoundScreen(game));
             else if(circleIndx==2) game.setScreen(new InstructionScreen(game,soundState));
             else if(circleIndx==3) game.setScreen(new CreditsScreen(game,soundState));
