@@ -31,7 +31,7 @@ public class Bomb {
         blastTime+=time;
         if(bomb.isAnimationFinished(blastTime)){
             SoundManager.BombBlow.play();
-            SoundManager.dispose();
+            //SoundManager.BombBlow.dispose();
             remove=true;
         }
     }

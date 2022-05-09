@@ -191,7 +191,6 @@ public class InsideStart implements Screen {
             this.dispose();
             game.setScreen(new endingLose(game,soundState));
         }
-
         if(keys.size()==0 && enemies.size()==0 && enemies2.size()==0){
             game.batch.draw(gameMap2,gameMapX,gameMapY,gameMapWidth,gameMapHight);
             allClear=true;

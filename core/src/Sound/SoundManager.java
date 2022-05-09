@@ -30,7 +30,7 @@ public class SoundManager {
         BombBlow = Gdx.audio.newMusic(Gdx.files.internal("Sound/Bomb_Blow.wav"));
 
         //Not yet implemented
-        Explosion = Gdx.audio.newMusic(Gdx.files.internal("Sound/Explosion_2.mp3"));
+        Explosion = Gdx.audio.newMusic(Gdx.files.internal("Sound/Explosion.mp3"));
     }
 
     public static void dispose() {
@@ -39,5 +39,10 @@ public class SoundManager {
         MenuSelection.dispose();
         MenuBack.dispose();
         MainTheme.dispose();
+        SwordSlash.dispose();
+        KeyFoundSound.dispose();
+        BombDrop.dispose();
+        BombBlow.dispose();
+        Explosion.dispose();
     }
 }
