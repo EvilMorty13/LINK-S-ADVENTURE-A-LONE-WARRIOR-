@@ -28,8 +28,6 @@ public class SoundManager {
         KeyFoundSound = Gdx.audio.newMusic(Gdx.files.internal("Sound/Key_Found_2.mp3"));
         BombDrop = Gdx.audio.newMusic(Gdx.files.internal("Sound/Bomb_Drop.wav"));
         BombBlow = Gdx.audio.newMusic(Gdx.files.internal("Sound/Bomb_Blow.wav"));
-
-        //Not yet implemented
         Explosion = Gdx.audio.newMusic(Gdx.files.internal("Sound/Explosion.mp3"));
     }
 

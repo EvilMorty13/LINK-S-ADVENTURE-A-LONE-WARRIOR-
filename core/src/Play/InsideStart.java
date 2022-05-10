@@ -48,6 +48,8 @@ public class InsideStart implements Screen {
     boolean UpStand=false;
     boolean DownStand=false;
 
+    boolean DoorOpen=false;
+
     float time;
 
     public float HeroX=70;
@@ -193,7 +195,9 @@ public class InsideStart implements Screen {
         }
         if(keys.size()==0 && enemies.size()==0 && enemies2.size()==0){
             game.batch.draw(gameMap2,gameMapX,gameMapY,gameMapWidth,gameMapHight);
+            if(!DoorOpen){SoundManager.Explosion.play();}
             allClear=true;
+            DoorOpen=true;
             for(smoke s : fog){
                 if(!s.done){
                     s.update(0.1f);
