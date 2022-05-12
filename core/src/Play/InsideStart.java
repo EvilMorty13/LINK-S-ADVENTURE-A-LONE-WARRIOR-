@@ -69,6 +69,10 @@ public class InsideStart implements Screen {
     float MapLimitX1=0;
     float MapLimitX2=-712;
 
+    //mute
+    float muteX=1000;
+    float muteY=2;
+
     //Obstacle Part
     obstaclesCollection obs = new obstaclesCollection();
 
@@ -582,7 +586,7 @@ public class InsideStart implements Screen {
             b.render(game.batch);
         }bombShow.removeAll(showBombRemove);
 
-        if(!soundState){game.batch.draw(mute,1130,2,30,30);}
+        if(!soundState){game.batch.draw(mute,muteX,muteY,30,30);}
 
         game.batch.draw(soulCollect[totalEnemy-(enemies.size()+enemies2.size())],soulX,soulY);
 
