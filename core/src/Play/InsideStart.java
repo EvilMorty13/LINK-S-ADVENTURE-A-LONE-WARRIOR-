@@ -90,6 +90,12 @@ public class InsideStart implements Screen {
     ArrayList<Death> deaths;
     soulCoordinateChange soul;
 
+    //Soul collect
+    Texture[] soulCollect;
+    int totalEnemy=17;
+    float soulX=1020;
+    float soulY=-10;
+
     //Enemies Vertical moves
     ArrayList<enemiesVerticalMovement> enemies2;
 
@@ -153,6 +159,9 @@ public class InsideStart implements Screen {
         deaths = new ArrayList<>();
         soul = new soulCoordinateChange();
 
+        //soul collect
+        soulCollect = new Texture[18];
+
         //keys
         keys = new ArrayList<>();
         keys = new keysList().get();
@@ -185,6 +194,10 @@ public class InsideStart implements Screen {
         StandLeft = new Texture("Stand/Stand_Left.png");
         StandUp = new Texture("Stand/Stand_Up.png");
         StandDown = new Texture("Stand/Stand_Down.png");
+        for(int i=0;i<18;i++){
+            if(i<10) soulCollect[i] = new Texture("Number/Number_0"+i+".png");
+            else soulCollect[i] = new Texture("Number/Number_"+i+".png");
+        }
     }
 
     @Override
@@ -570,6 +583,8 @@ public class InsideStart implements Screen {
         }bombShow.removeAll(showBombRemove);
 
         if(!soundState){game.batch.draw(mute,1130,2,30,30);}
+
+        game.batch.draw(soulCollect[totalEnemy-(enemies.size()+enemies2.size())],soulX,soulY);
 
         game.batch.end();
     }
