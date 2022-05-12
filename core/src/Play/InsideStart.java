@@ -391,13 +391,21 @@ public class InsideStart implements Screen {
             for(enemiesHorizontalMovement e : enemies){
                 if(e.posX>=b.x-b.damageLimit && e.posX<=b.x+b.damageLimit && e.posY>=b.y-b.damageLimit && e.posY<=b.y+b.damageLimit){
                     Removed.add(e);
-                    if(b.remove) deaths.add(new Death(e.posX,e.posY));
+                    if(b.remove){
+                        SoundManager.Death.stop();
+                        SoundManager.Death.play();
+                        deaths.add(new Death(e.posX,e.posY));
+                    }
                 }
             }
             for(enemiesVerticalMovement e : enemies2){
                 if(e.posX>=b.x-b.damageLimit && e.posX<=b.x+b.damageLimit && e.posY>=b.y-b.damageLimit && e.posY<=b.y+b.damageLimit){
                     Removed2.add(e);
-                    if(b.remove) deaths.add(new Death(e.posX,e.posY));
+                    if(b.remove){
+                        SoundManager.Death.stop();
+                        SoundManager.Death.play();
+                        deaths.add(new Death(e.posX,e.posY));
+                    }
                 }
             }
             if(b.remove){
