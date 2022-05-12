@@ -1,5 +1,6 @@
 package Play;
 
+import EnemyDeath.Death;
 import Menu.MenuScreen;
 import ObstacleDetection.*;
 import com.badlogic.gdx.Gdx;
@@ -23,6 +24,7 @@ import Enemies.*;
 import BombCounter.*;
 import HeartCounter.*;
 import KeysCollect.*;
+import EnemyDeath.*;
 
 import java.util.ArrayList;
 
@@ -83,6 +85,11 @@ public class InsideStart implements Screen {
     enemiesPosChange enPosChange = new enemiesPosChange();
     enemiesNegChange enNegChange = new enemiesNegChange();
 
+    //Enemies death
+    //Death death;
+    ArrayList<Death> deaths;
+    soulCoordinateChange soul;
+
     //Enemies Vertical moves
     ArrayList<enemiesVerticalMovement> enemies2;
 
@@ -141,6 +148,10 @@ public class InsideStart implements Screen {
 
         //Vertical Enemies
         enemies2 = new VerticalEnemies().get();
+
+        //enemies death
+        deaths = new ArrayList<>();
+        soul = new soulCoordinateChange();
 
         //keys
         keys = new ArrayList<>();
@@ -206,8 +217,6 @@ public class InsideStart implements Screen {
             }
         }
         else game.batch.draw(gameMap,gameMapX,gameMapY,gameMapWidth,gameMapHight);
-//        fog.update(0.1f,fog.x, fog.y);
-//        fog.render(game.batch);
 
         Princess.update(0.2f,princessX,princessY);
         Princess.render(game.batch);
@@ -237,11 +246,24 @@ public class InsideStart implements Screen {
             b.render(game.batch);
         }
 
+        for(Death d : deaths){
+            d.render(game.batch);
+        }
+
+        ArrayList<Death> deathRemove = new ArrayList<>();
+        for(Death d : deaths){
+            d.update(0.2f);
+            if(d.remove) deathRemove.add(d);
+        }deaths.removeAll(deathRemove);
+
 
         ArrayList<enemiesHorizontalMovement> Removed = new ArrayList<>();
         for(enemiesHorizontalMovement e : enemies){
             e.update(0.1f,HeroX,HeroY);
-            if(e.remove) Removed.add(e);
+            if(e.remove){
+                Removed.add(e);
+                deaths.add(new Death(e.posX,e.posY));
+            }
             if(e.enemyAttack>=100){
                 heartCounter++;
                 e.enemyAttack=0;
@@ -251,6 +273,7 @@ public class InsideStart implements Screen {
                         bombNegChange.change(bombs);
                         enNegChange.change(enemies);
                         enNegChange.change2(enemies2);
+                        soul.negChange(deaths);
                         keysLocationChange.negChange(keys);
                         checkPointX+=4;
                         HeroLeftLimit+=4;
@@ -266,6 +289,7 @@ public class InsideStart implements Screen {
                         enPosChange.change(enemies);
                         enPosChange.change2(enemies2);
                         keysLocationChange.posChange(keys);
+                        soul.posChange(deaths);
                         checkPointX-=4;
                         HeroLeftLimit-=4;
                         princessX-=4;
@@ -283,7 +307,10 @@ public class InsideStart implements Screen {
         ArrayList<enemiesVerticalMovement> Removed2 = new ArrayList<>();
         for(enemiesVerticalMovement e : enemies2){
             e.update(0.1f,HeroX,HeroY);
-            if(e.remove) Removed2.add(e);
+            if(e.remove){
+                Removed2.add(e);
+                deaths.add(new Death(e.posX,e.posY));
+            }
             if(e.enemyAttack>=100){
                 heartCounter++;
                 e.enemyAttack=0;
@@ -293,6 +320,7 @@ public class InsideStart implements Screen {
                         bombNegChange.change(bombs);
                         enNegChange.change(enemies);
                         enNegChange.change2(enemies2);
+                        soul.negChange(deaths);
                         keysLocationChange.negChange(keys);
                         checkPointX+=4;
                         HeroLeftLimit+=4;
@@ -306,6 +334,7 @@ public class InsideStart implements Screen {
                         negChange.change(obs.obs3,obs.obs4,obs.obs5,obs.obs6,obs.obs7,obs.obs8,obs.obs9,obs.obs10,obs.obs11,obs.obs12,obs.obs14,obs.obs15,obs.obs16,obs.obs17,obs.obs17_bridge,obs.obs18,obs.obs19,obs.obs20,obs.obs21,obs.obs22,obs.obs23,obs.obs24,obs.obs25,obs.obs26, obs.obsHome);
                         bombPosChange.change(bombs);
                         enPosChange.change(enemies);
+                        soul.posChange(deaths);
                         enPosChange.change2(enemies2);
                         keysLocationChange.posChange(keys);
                         checkPointX-=4;
@@ -339,14 +368,21 @@ public class InsideStart implements Screen {
         for(Bomb b : bombs){
             b.update(0.05f);
             for(enemiesHorizontalMovement e : enemies){
-                if(e.posX>=b.x-b.damageLimit && e.posX<=b.x+b.damageLimit && e.posY>=b.y-b.damageLimit && e.posY<=b.y+b.damageLimit) Removed.add(e);
+                if(e.posX>=b.x-b.damageLimit && e.posX<=b.x+b.damageLimit && e.posY>=b.y-b.damageLimit && e.posY<=b.y+b.damageLimit){
+                    Removed.add(e);
+                    if(b.remove) deaths.add(new Death(e.posX,e.posY));
+                }
             }
             for(enemiesVerticalMovement e : enemies2){
-                if(e.posX>=b.x-b.damageLimit && e.posX<=b.x+b.damageLimit && e.posY>=b.y-b.damageLimit && e.posY<=b.y+b.damageLimit) Removed2.add(e);
+                if(e.posX>=b.x-b.damageLimit && e.posX<=b.x+b.damageLimit && e.posY>=b.y-b.damageLimit && e.posY<=b.y+b.damageLimit){
+                    Removed2.add(e);
+                    if(b.remove) deaths.add(new Death(e.posX,e.posY));
+                }
             }
             if(b.remove){
                 toRemove.add(b);
                 enemies.removeAll(Removed);
+
                 enemies2.removeAll(Removed2);
                 if(HeroX>=b.x-b.damageLimit && HeroX<=b.x+b.damageLimit && HeroY>=b.y-b.damageLimit && HeroY<=b.y+b.damageLimit){
                     if(keyChose<3){
@@ -355,6 +391,7 @@ public class InsideStart implements Screen {
                             bombNegChange.change(bombs);
                             enNegChange.change(enemies);
                             enNegChange.change2(enemies2);
+                            soul.negChange(deaths);
                             keysLocationChange.negChange(keys);
                             checkPointX+=4;
                             HeroLeftLimit+=4;
@@ -369,6 +406,7 @@ public class InsideStart implements Screen {
                             bombPosChange.change(bombs);
                             enPosChange.change(enemies);
                             enPosChange.change2(enemies2);
+                            soul.posChange(deaths);
                             keysLocationChange.posChange(keys);
                             checkPointX-=4;
                             HeroLeftLimit-=4;
@@ -404,6 +442,7 @@ public class InsideStart implements Screen {
                     bombPosChange.change(bombs);
                     enPosChange.change(enemies);
                     enPosChange.change2(enemies2);
+                    soul.posChange(deaths);
                     keysLocationChange.posChange(keys);
                     checkPointX-=4;
                     HeroLeftLimit-=4;
@@ -437,6 +476,7 @@ public class InsideStart implements Screen {
                     enNegChange.change(enemies);
                     enNegChange.change2(enemies2);
                     keysLocationChange.negChange(keys);
+                    soul.negChange(deaths);
                     checkPointX+=4;
                     HeroLeftLimit+=4;
                     fogList.negativeChange();
