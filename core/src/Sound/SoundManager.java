@@ -16,6 +16,7 @@ public class SoundManager {
     public static Music BombBlow;
 
     public static Music Explosion;
+    public static Music Death;
 
 
     public static void create() {
@@ -29,6 +30,7 @@ public class SoundManager {
         BombDrop = Gdx.audio.newMusic(Gdx.files.internal("Sound/Bomb_Drop.wav"));
         BombBlow = Gdx.audio.newMusic(Gdx.files.internal("Sound/Bomb_Blow.wav"));
         Explosion = Gdx.audio.newMusic(Gdx.files.internal("Sound/Explosion.mp3"));
+        Death = Gdx.audio.newMusic(Gdx.files.internal("Sound/Death.mp3"));
     }
 
     public static void dispose() {
@@ -42,5 +44,6 @@ public class SoundManager {
         BombDrop.dispose();
         BombBlow.dispose();
         Explosion.dispose();
+        Death.dispose();
     }
 }

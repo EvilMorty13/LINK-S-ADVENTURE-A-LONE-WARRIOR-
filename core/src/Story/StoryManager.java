@@ -15,7 +15,7 @@ public class StoryManager implements Screen {
     MainGame game;
     public boolean soundState;
 
-    Texture[] st = new Texture[5];
+    Texture[] st = new Texture[17];
     int stIndex=0;
 
     public StoryManager(MainGame game, boolean soundState){
@@ -26,11 +26,17 @@ public class StoryManager implements Screen {
     @Override
     public void show() {
         SoundManager.create();
+        for(int i=0;i<17;i++){
+            st[i] = new Texture("Story/Story_"+(i+1)+".png");
+        }
+        /*
         st[0] = new Texture("Story/Story_1.png");
         st[1] = new Texture("Story/Story_2.png");
         st[2] = new Texture("Story/Story_3.png");
         st[3] = new Texture("Story/Story_4.png");
         st[4] = new Texture("Story/Story_5.png");
+        */
+
     }
 
     @Override
@@ -42,7 +48,7 @@ public class StoryManager implements Screen {
         if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
             SoundManager.MenuSelection.stop();
             SoundManager.MenuSelection.play();
-            if(stIndex==4){
+            if(stIndex==16){
                 this.dispose();
                 SoundManager.MenuSelection.stop();
                 SoundManager.MenuSelection.play();
@@ -61,7 +67,6 @@ public class StoryManager implements Screen {
             }
             stIndex--;
         }
-
 
         game.batch.end();
     }

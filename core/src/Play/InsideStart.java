@@ -278,6 +278,8 @@ public class InsideStart implements Screen {
         for(enemiesHorizontalMovement e : enemies){
             e.update(0.1f,HeroX,HeroY);
             if(e.remove){
+                SoundManager.Death.stop();
+                SoundManager.Death.play();
                 Removed.add(e);
                 deaths.add(new Death(e.posX,e.posY));
             }
@@ -325,6 +327,8 @@ public class InsideStart implements Screen {
         for(enemiesVerticalMovement e : enemies2){
             e.update(0.1f,HeroX,HeroY);
             if(e.remove){
+                SoundManager.Death.stop();
+                SoundManager.Death.play();
                 Removed2.add(e);
                 deaths.add(new Death(e.posX,e.posY));
             }
