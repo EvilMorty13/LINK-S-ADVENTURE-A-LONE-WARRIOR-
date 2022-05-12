@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import Sound.*;
 public class smoke {
-    Animation smokeAnimation;
+    public Animation smokeAnimation;
     float smokeTime;
     public float x,y;
     public boolean done=false;
@@ -24,6 +24,19 @@ public class smoke {
         }
         smokeAnimation=new Animation(1f,smokeArray);
     }
+
+    public smoke(){
+        TextureRegion[][] tempSmoke = TextureRegion.split(new Texture("Smoke/Smoke.png"),100,100);
+        TextureRegion[] smokeArray = new TextureRegion[6];
+        int index=0;
+        for(int i=0;i<3;i++){
+            for(int j=0;j<2;j++){
+                smokeArray[index++]=tempSmoke[i][j];
+            }
+        }
+        smokeAnimation=new Animation(1f,smokeArray);
+    }
+
     public void update(float time){
         smokeTime+=time;
         if(smokeAnimation.isAnimationFinished(smokeTime)) done=true;

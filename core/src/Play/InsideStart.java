@@ -337,7 +337,7 @@ public class InsideStart implements Screen {
         ArrayList<Bomb> toRemove = new ArrayList<Bomb>();
 
         for(Bomb b : bombs){
-            b.update(0.02f);
+            b.update(0.05f);
             for(enemiesHorizontalMovement e : enemies){
                 if(e.posX>=b.x-b.damageLimit && e.posX<=b.x+b.damageLimit && e.posY>=b.y-b.damageLimit && e.posY<=b.y+b.damageLimit) Removed.add(e);
             }

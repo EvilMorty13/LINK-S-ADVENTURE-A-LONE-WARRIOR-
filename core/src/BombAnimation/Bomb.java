@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import Sound.*;
+import Play.smoke;
 
 public class Bomb {
     public float x;
     public float y;
     public Animation bomb=null;
+    public Animation smokeAnimation;
     public static final int damageLimit=100;
     float blastTime;
     public boolean remove=false;
@@ -26,6 +28,7 @@ public class Bomb {
             }
         }
         bomb = new Animation(1f,tempArr);
+        smokeAnimation = new smoke().smokeAnimation;
     }
     public void update(float time){
         blastTime+=time;
@@ -37,5 +40,6 @@ public class Bomb {
     }
     public void render(SpriteBatch batch){
         batch.draw((TextureRegion) bomb.getKeyFrame(blastTime,true),x,y);
+        batch.draw((TextureRegion) smokeAnimation.getKeyFrame(blastTime,true),x,y);
     }
 }
