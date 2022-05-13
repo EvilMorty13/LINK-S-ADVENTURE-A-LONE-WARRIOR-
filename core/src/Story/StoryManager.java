@@ -37,6 +37,13 @@ public class StoryManager implements Screen {
 
         game.batch.draw(st[stIndex],0,0);
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.S)){
+            this.dispose();
+            SoundManager.MenuSelection.stop();
+            SoundManager.MenuSelection.play();
+            game.setScreen(new InsideStart(game,soundState));
+        }
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
             SoundManager.MenuSelection.stop();
             SoundManager.MenuSelection.play();
