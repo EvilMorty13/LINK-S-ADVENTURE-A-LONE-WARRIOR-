@@ -47,6 +47,7 @@ Here are some pages of game play. In the first page we can see multiple guards. 
 
 
 ### After defeating all guards
+After defeating all guards and collecting keys, the barrier will be vanished automatically.     
 
 <img src="./Interface/GamePlay3.png">
 
